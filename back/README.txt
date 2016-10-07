@@ -1,1 +1,1 @@
-Uses Python 3.5
+Uses Python 3.5.
