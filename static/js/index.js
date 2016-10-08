@@ -152,7 +152,7 @@ function initChat(nickname) {
 
   //Let user know role once game starts
   socket.on('started', function(data) {
-    $('#server-message').text('Your role: ${data.role}');
+    sendSystemMessage("Game started. Role: " + data.role, "22AA22");
   });
 
   //Add received message to chat
