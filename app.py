@@ -26,7 +26,7 @@ def started(username, role):
 
 @app.route('/')
 def index():
-    return render_template('websocket_index.html', async_mode=socketio.async_mode)
+    return render_template('index.html', async_mode=socketio.async_mode)
 
 @socketio.on('start_request', namespace='/chat')
 def start_request(message):

@@ -5372,3 +5372,29 @@ Traceback (most recent call last):
   File "<string>", line 1, in bind
 error: [Errno 48] Address already in use: ('0.0.0.0', 5000)
 
+ * Detected change in '/Users/fraser/Documents/TuringLeague/app.py', reloading
+ * Restarting with stat
+ * Detected change in '/Users/fraser/Documents/TuringLeague/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger is active!
+ * Debugger pin code: 236-058-013
+ * Debugger pin code: 236-058-013
+Traceback (most recent call last):
+  File "app.py", line 76, in <module>
+    socketio.run(app, debug=True, host='0.0.0.0')
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/flask_socketio/__init__.py", line 506, in run
+    run_with_reloader(run_server, extra_files=extra_files)
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/werkzeug/serving.py", line 700, in run_with_reloader
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/gevent/builtins.py", line 93, in __import__
+Traceback (most recent call last):
+  File "app.py", line 76, in <module>
+    socketio.run(app, debug=True, host='0.0.0.0')
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/flask_socketio/__init__.py", line 506, in run
+    result = _import(*args, **kwargs)
+ImportError: No module named _reloader
+    run_with_reloader(run_server, extra_files=extra_files)
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/werkzeug/serving.py", line 700, in run_with_reloader
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/gevent/builtins.py", line 93, in __import__
+    result = _import(*args, **kwargs)
+ImportError: No module named _reloader
