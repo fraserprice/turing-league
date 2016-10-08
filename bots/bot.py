@@ -1,5 +1,4 @@
 from chatterbotapi import ChatterBotFactory, ChatterBotType
-
 class Bot:
 
     def __init__(self, bot_type):
