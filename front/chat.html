@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col-md-10">
             <div class="panel panel-primary">
-                <div class="panel-heading">
+                <div class="panel-heading" id="chat-panel">
                     <span class="glyphicon glyphicon-comment"></span> Chat
                 </div>
                 <div class="panel-body" id="chat-body">
@@ -93,25 +93,31 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <h2 class="text-center">Time left: </h2>
-                <div class="progress progress-striped">
-                    <div class="progress-bar" style="width: 60%;" aria-describedby="time-left">
-                        <span class="progress-text">6</span>
+                <div class="row side-chat">
+                    <h2 class="text-center">Time left: </h2>
+                    <div class="progress progress-striped">
+                        <div class="progress-bar" style="width: 60%;" aria-describedby="time-left">
+                            <span class="progress-text">6</span>
+                        </div>
                     </div>
                 </div>
+                <div class="row side-chat">
                 <h2 class="text-center">Responses left: </h2>
                 <div class="progress progress-striped">
                     <div class="progress-bar progress-bar-info" style="width: 70%;">
                         <span class="progress-text">7/10</span>
                     </div>
                 </div>
-                <h2 class="text-center">Is this a bot?</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <button type="button" class="btnyes">Yes</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="button" class="btnno">No</button>
+                </div>
+                <div class="row side-chat">
+                    <h2 class="text-center">Is this a bot?</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btnyes">Yes</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btnno">No</button>
+                        </div>
                     </div>
                 </div>
             </div>
