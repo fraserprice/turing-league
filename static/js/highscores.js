@@ -8,8 +8,12 @@ function fetchDatabase() {
     var res = httpGet(usersUrl);
     var db = JSON.parse(res);
 
-    for (var i = 1; i <= 10; i++) {
-        addRecord(i, "asdf", 55);
+    var num = db['score'].length;
+    if (num > 10) {
+        num = 10;
+    }
+    for (var i = 0; i < num; i++) {
+        addRecord(i+1, db['user_name'][i], db['score'][i]);
     }
 }
 
