@@ -17,7 +17,7 @@ class Bot:
     def bot_type(self):
         return self._bot_type
 
-    def start_session(self, bot):
+    def start_session(self):
         return self.bot.create_session()
 
 BOTS = [Bot("cleverbot"), Bot("pandorabots")]
