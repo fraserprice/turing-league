@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $("#main-chat").hide();
 
     $("#btn-chat").click({author: "asdf", msg: $("#btn-input")}, sendMessage);
     $("#btn-start").click({author: "auth"}, initChat);
@@ -24,7 +25,10 @@ function initChat(event) {
   $("#chat-panel").css("border-bottom", "#337AB7");
   $(".panel").css("border-color", "#337AB7");
 
-  $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
+  $(".jumbotron").css("height", "320px");
+  $("#main-chat").show(600, function() {
+    $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
+  });
   
   var socket = new WebSocket('ws://10.192.216.241:5000');
   socket.send("xd");
