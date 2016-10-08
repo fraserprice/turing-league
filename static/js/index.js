@@ -1,8 +1,15 @@
 var socket;
+var user = "";
 
 $(document).ready(function() {
-    $("#btn-chat").click({author: "asdf", msg: $("#btn-input")}, sendMessage);
-    $("#btn-start").click({nickname: $("#nickname-input")}, initChat);
+    $("#btn-start").click(function() {
+        setNickname();
+    });
+
+    $("#btn-chat").click(function() {
+        setMessage();
+    });
+
     $("#btn-yes").click(replyYes);
     $("btn-no").click(replyNo);
 
@@ -11,6 +18,32 @@ $(document).ready(function() {
     $("#main-chat").hide();
     $("#is-bot-dialog").hide();
 });
+
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        if (user === "") {
+            setNickname();
+        } else {
+            setMessage();
+        }
+    }
+});
+
+function setNickname() {
+    var nick = $("#nickname-input").val(); 
+    if (nick !== "") {
+        user = nick;
+        initChat(nick);
+        $("#btn-input").focus();
+    }
+}
+
+function setMessage() {
+    var msg = $("#btn-input").val();
+    if (msg !== "") {
+        sendMessage($("#nickname-input").val(), msg);
+    }
+}
 
 function getCurrentTime() {
     var date = new Date();
@@ -30,11 +63,11 @@ function getCurrentTime() {
     return time;
 }
 
-function sendMessage(event) {
+function sendMessage(author, msg) {
     socket.emit('message_submitted', { message: "TODO"});
     var time = getCurrentTime();
-    var initial = event.data.author.substring(0,1);
-    var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/55C1E7/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"> <strong class="primary-font">' + event.data.author + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> <p>' + event.data.msg + '</p> </div> </li>'
+    var initial = author.substring(0,1);
+    var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/55C1E7/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"> <strong class="primary-font">' + author + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> <p>' + msg + '</p> </div> </li>'
 
     $(".chat").append(post);
     var chat = document.getElementById("chat-body");
@@ -45,6 +78,7 @@ function sendMessage(event) {
         setResponsesLeft(curr - 1);
     }
 
+    $("#btn-input").val("");
     setTimer(10);
 }
 
@@ -78,7 +112,7 @@ function setResponsesLeft(value) {
   }
 }
 
-function initChat(event) {
+function initChat(nickname) {
   $('#btn-chat').prop('disabled', false);
   $('#btn-input').prop('disabled', false);
   $('#nickname-input').prop('disabled', true);
@@ -97,7 +131,7 @@ function initChat(event) {
   socket = io.connect('http://localhost:5000/chat');
 
   //Send game start request
-  socket.emit("start_request", { nickname: event.data.nickname });
+  socket.emit("start_request", { nickname: nickname });
   setResponsesLeft(10);
 
   //Let user know role once game starts

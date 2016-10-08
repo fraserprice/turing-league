@@ -15,6 +15,10 @@ body {
     -webkit-transition: 1s;
 }
 
+#nickname-input {
+    margin-right: 15px;
+}
+
 .chat
 {
     list-style: none;

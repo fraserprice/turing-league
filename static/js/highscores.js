@@ -7,6 +7,7 @@ $(document).ready(function() {
 function fetchDatabase() {
     var res = httpGet(usersUrl);
     var db = JSON.parse(res);
+
     for (var i = 1; i <= 10; i++) {
         addRecord(i, "asdf", 55);
     }
