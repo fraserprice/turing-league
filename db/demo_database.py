@@ -5,12 +5,10 @@ from database import Database
 db = Database()
 
 top_users = db.get_top_users_table()
-for entry in top_users:
-    print(entry)
+print(top_users)
 
 top_bots = db.get_top_bots_table()
-for entry in top_bots:
-    print(entry)
+print(top_bots)
 
 #print(db.get_best_user())
 
