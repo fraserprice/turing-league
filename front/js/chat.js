@@ -1,5 +1,8 @@
 $(document).ready(function() {
     $("#btn-chat").click({author: "asdf", msg: $("#btn-input").text}, sendMessage);
+    $("#btn-start").click(function() {
+        $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
+    });
 });
 
 function sendMessage(event) {

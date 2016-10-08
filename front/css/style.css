@@ -117,6 +117,47 @@ button:focus {
 }
 
 .score-row {
-    font-size: 50px;
-    border: 5px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 30px;
+    background-color: #555555;
+    color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.score-rank {
+    border-right: 1px solid black;
+}
+
+.score-points {
+    border-left: 1px solid black;
+}
+
+.score-name {
+    background-color: #efefef;
+    color: #000000;
+}
+
+#score-title {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+#score-first {
+    background-color: gold;
+    color: #000000;
+}
+
+#score-second {
+    background-color: silver;
+    color: #000000;
+}
+
+#score-third {
+    background-color: #cd7f32;
+    color: #000000;
 }
