@@ -1,4 +1,5 @@
 import MySQLdb
+import json
 class Database:
 
    #DO NOT CHANGE THE QUERY FORMAT. PYTHON DOESN'T LIKE IT :(   
@@ -17,7 +18,10 @@ class Database:
         output = []
         for row in rows:
             output.append(row)
-        return output
+        res_dict = { "user_name" : [x[0] for x in output],
+                     "score"     : [x[1] for x in output],
+                   }
+        return(json.dumps(res_dict))
     
     def get_top_bots_table(self):
         cur = self.db.cursor()
@@ -27,7 +31,10 @@ class Database:
         output = []
         for row in rows:
             output.append(row)
-        return output
+        res_dict = { "bot_name" : [x[0] for x in output],
+                     "score"     : [x[1] for x in output],
+                   }
+        return(json.dumps(res_dict))
 
     def get_best_user(self):
         cur = self.db.cursor()
