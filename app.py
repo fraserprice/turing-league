@@ -8,7 +8,7 @@ from chatbot import ChatBot
 from bots import bot
 from game import Game
 import random
-# from db import database
+from db import database
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
@@ -52,12 +52,15 @@ def start_request(message):
 
         if not players_in_lobby:
             print 'adding ' + username  + ' to lobby...'
-            players_in_lobby[player.name()] = Timer(30.0, create_bot_game, player)
+            timer = Timer(30.0, create_bot_game, (player,))
+            players_in_lobby[player.name()] = timer
+            timer.start()
 
         else:
             # remove first player form lobby
             opponent_username, opponent_timer = players_in_lobby.items()[0]
             opponent_timer.cancel()
+            del players_in_lobby[opponent_username]
             opponent = username_to_player[opponent_username]
 
             print 'matching ' + player.name() + ' with ' + opponent.name()
