@@ -11,6 +11,12 @@ class Game:
         self._attacker.start_game('attacker', self._ROUNDS)
         self._defender.start_game('defender', self._ROUNDS)
 
+    def message(self, username, message):
+        if self._attacker.name() == username:
+            self.attacker_message(message)
+        else:
+            self.defender_message(message)
+
     def attacker_message(self, message):
         self._defender.send_message(message)
 

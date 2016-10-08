@@ -47,7 +47,7 @@ def start_request(message):
     username = message['nickname']
 
     if not (username in players_in_game) or (username in players_in_lobby):
-        player = Human(username, lambda event, data : emit(event, data, room=request.sid))
+        player = Human(username, request.sid)
         username_to_player[username] = player
 
         if not players_in_lobby:
@@ -68,8 +68,7 @@ def start_request(message):
 @socketio.on('message_submitted', namespace='/chat')
 def message_submitted(message):
     print 'message submitted'
-    # TODO: notify game
-    print message['message']
+    players_in_game[username_to_player[message['user']]].message(message['user'], message['message'])
 
 @socketio.on('bot_decision', namespace='/chat')
 def bot_decision(message):
