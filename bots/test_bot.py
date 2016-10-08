@@ -1,5 +1,5 @@
 from chatterbotapi import ChatterBotFactory, ChatterBotType
-from Bot import Bot
+from bot import Bot
 
 factory = ChatterBotFactory()
 
