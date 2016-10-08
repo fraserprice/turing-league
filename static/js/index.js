@@ -77,7 +77,7 @@ function getCurrentTime() {
 
 function sendMessage(author, msg) {
     disableChat(true);    
-    socket.emit('message_submitted', { message : msg });
+    socket.emit('message_submitted', { user : user, message : msg });
     var time = getCurrentTime();
     var initial = author.substring(0,1);
     var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/55C1E7/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"> <strong class="primary-font">' + author + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> <p>' + msg + '</p> </div> </li>'
