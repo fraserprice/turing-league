@@ -34,15 +34,20 @@
       </div>
     </nav>
 
-       <div class="jumbotron">
+     <div class="jumbotron">
       <div class="container">
         <h1>Turing League</h1>
         <p>fight against robots</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button" id="btn-start">Start chatting</a></p>
+        <p>
+        <form class="form-inline">
+            <input id="nickname-input" type="text" class="form-control input-lg" placeholder="Nickname">
+            <a class="btn btn-primary btn-lg" id="btn-start" href="#" role="button">Start chatting</a>
+        </form>
+        </p>
       </div>
     </div> 
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="main-chat">
     <div class="row">
         <div class="col-md-10">
             <div class="panel panel-primary">
@@ -85,8 +90,7 @@
                     <div class="input-group">
                         <input id="btn-input" type="text" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat">
-                                Send</button>
+                            <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
                         </span>
                     </div>
                 </div>
@@ -96,26 +100,24 @@
                 <div class="row side-chat">
                     <h2 class="text-center">Time left: </h2>
                     <div class="progress progress-striped">
-                        <div class="progress-bar" style="width: 60%;" aria-describedby="time-left">
-                            <span class="progress-text">6</span>
+                        <div class="progress-bar" style="width: 60%;" id="time-bar">
+                            <span class="progress-text" id="time-val">6</span>
                         </div>
                     </div>
                 </div>
                 <div class="row side-chat">
                 <h2 class="text-center">Responses left: </h2>
                 <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-info" style="width: 70%;">
-                        <span class="progress-text">7/10</span>
+                    <div class="progress-bar progress-bar-info" style="width: 70%;" id="responses-bar">
+                        <span class="progress-text" id="responses-val">7/10</span>
                     </div>
                 </div>
                 </div>
-                <div class="row side-chat">
+                <div class="row side-chat" id="is-bot-dialog">
                     <h2 class="text-center">Is this a bot?</h2>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12 text-center">
                             <button type="button" class="btnyes">Yes</button>
-                        </div>
-                        <div class="col-md-6">
                             <button type="button" class="btnno">No</button>
                         </div>
                     </div>
