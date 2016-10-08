@@ -1,6 +1,7 @@
 from flask import Flask, render_template, session, request
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
     close_room, rooms, disconnect
+from threading import Timer
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
@@ -10,17 +11,18 @@ async_mode = None
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
-thread = None
 
-def background_thread():
-    """Example of how to send server generated events to clients."""
-    count = 0
-    while True:
-        socketio.sleep(10)
-        count += 1
-        socketio.emit('my_response',
-                      {'data': 'Server generated event', 'count': count},
-                      namespace='/test')
+user_to_session = {}
+games = []
+users_waiting = []
+user_to_matching_thread = {}
+
+def create_bot_game(username):
+    # games.append(Game(username, # random bot))
+    users_waiting.remove(username)
+
+def started(username, role):
+    emit('started', {'role': role}, namespace='/chat')
 
 @app.route('/')
 def index():
@@ -29,12 +31,20 @@ def index():
 @socketio.on('start_request', namespace='/chat')
 def start_request(message):
     print 'start request'
-    # TODO: start matchmaking process
-    # global thread
-    # if thread is None:
-    #     thread = socketio.start_background_task(target=background_thread)
-    print message['nickname']
 
+    username = message['nickname']
+    user_to_session[username] = request.namespace
+
+    if not username in users_waiting:
+        if not users_waiting:
+            users_waiting.append(username)
+            user_to_matching_thread[username] = Timer(30.0, create_bot_game, username)
+        else:
+            other_player = users_waiting[0]
+            users_to_matching_thread[other_player].cancel()
+            games.append(Game(username, other_player))
+            users_waiting.remove(other_player)
+            
 @socketio.on('message_submitted', namespace='/chat')
 def message_submitted(message):
     print 'message submitted'
@@ -50,16 +60,16 @@ def bot_decision(message):
 @socketio.on('stop_request', namespace='/chat')
 def stop_request():
     print 'stop request'
-    # TODO: norufy gane
+    # TODO: notify game
     disconnect()
 
 @socketio.on('connect', namespace='/chat')
-def test_connect():
+def socket_connect():
     # TODO: 
     print 'connect'
 
 @socketio.on('disconnect', namespace='/chat')
-def test_disconnect():
+def socket_disconnect():
     print 'disconnect'
 
 if __name__ == '__main__':
