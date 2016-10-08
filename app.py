@@ -17,7 +17,7 @@ user_to_session = {}
 games = []
 users_waiting = []
 user_to_matching_thread = {}
-db = database.Database()
+# db = database.Database()
 
 def create_bot_game(username):
     print 'creating a bot game'
@@ -38,11 +38,13 @@ def highscores():
 
 @app.route('/leaderboards/bots', methods=['GET'])
 def get_best_bots():
-    return db.get_top_bots_table()
+    pass
+    # return db.get_top_bots_table()
 
 @app.route('/leaderboards/users', methods=['GET'])
 def get_best_users():
-    return db.get_top_users_table()
+    pass
+    # return db.get_top_users_table()
 
 @socketio.on('start_request', namespace='/chat')
 def start_request(message):
