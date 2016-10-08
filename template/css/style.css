@@ -115,3 +115,8 @@ button:focus {
   background: #d11b1b;
   text-decoration: none;
 }
+
+.score-row {
+    font-size: 50px;
+    border: 5px;
+}
