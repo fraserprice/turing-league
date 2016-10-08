@@ -20,7 +20,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 
 players_in_game = {} # username -> game
-players_in_lobby = {} # username -> timer
+players_in_lobby = [] # usernames
 username_to_player = {} # username -> player
 db = database.Database()
 
@@ -52,21 +52,31 @@ def start_request(message):
 
         if not players_in_lobby:
             print 'adding ' + username  + ' to lobby...'
-            timer = Timer(30.0, create_bot_game, (player,))
-            players_in_lobby[player.name()] = timer
-            timer.start()
+            players_in_lobby.append(username)
 
         else:
             # remove first player form lobby
-            opponent_username, opponent_timer = players_in_lobby.items()[0]
-            opponent_timer.cancel()
-            del players_in_lobby[opponent_username]
+            opponent_username = players_in_lobby.pop()
             opponent = username_to_player[opponent_username]
 
-            print 'matching ' + player.name() + ' with ' + opponent.name()
-            game = Game(player, opponent)
-            players_in_game[player] = game
-            players_in_game[opponent] = game
+            if random.choice([True, False]):
+                random_bot = random.choice(bot.BOTS)
+                chatbot = ChatBot(random_bot.bot_type(), random_bot.start_session())
+                print 'matching ' + opponent.name() + ' with ' + chatbot.name()
+                players_in_game[opponent] = Game(opponent, chatbot)
+
+                print 'adding ' + username  + ' to lobby...'
+                players_in_lobby.append(username)
+
+            else:
+                print 'matching ' + player.name() + ' with ' + opponent.name()
+                if random.choice([True, False]):
+                    game = Game(player, opponent)
+                else:
+                    game = Game(opponent, player)
+
+                players_in_game[player] = game
+                players_in_game[opponent] = game
             
 @socketio.on('message_submitted', namespace='/chat')
 def message_submitted(message):
@@ -94,11 +104,11 @@ def socket_connect():
 def socket_disconnect():
     print 'disconnect'
 
+def start_timer(timer):
+    timer.start()
+
 def create_bot_game(player):
     print player.name() + ' will play a bot game'
-    random_bot = random.choice(bot.BOTS)
-    chatbot = ChatBot(random_bot.bot_type(), random_bot.start_session())
-    players_in_game[player] = Game(player, chatbot)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0')
