@@ -1,11 +1,11 @@
 var socket;
 var user;
+var role;
 
 $(document).ready(function() {
-    user = "";
-
     socket = null;
     user = "";
+    role = "";
 
     $("#btn-start").click(function() {
         setNickname();
@@ -126,7 +126,6 @@ function setResponsesLeft(value) {
 }
 
 function initChat(nickname) { 
-  disableChat(false);
   $('#nickname-input').prop('disabled', true);
   $('#btn-start').prop('disabled', true);
 
@@ -153,6 +152,9 @@ function initChat(nickname) {
   //Let user know role once game starts
   socket.on('started', function(data) {
     sendSystemMessage("Game started. Role: " + data.role, "22AA22");
+    if(data.role === "attacker") {
+        disableChat(false);
+    }
   });
 
   //Add received message to chat
