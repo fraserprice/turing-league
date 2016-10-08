@@ -8,6 +8,11 @@ body {
         }
 }
 
+.jumbotron {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/9/92/TOPIO_3.jpg");
+    color: #ffffff;
+}
+
 .chat
 {
     list-style: none;
@@ -67,6 +72,11 @@ body {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
 } 
+
+.progress-text {
+    color: #ffffff;
+    font-size: 15px;
+}
 
 button:focus {
     outline: 0;
