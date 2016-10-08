@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $("#main-chat").hide();
+    $("#is-bot-dialog").hide();
 
     $("#btn-chat").click({author: "asdf", msg: $("#btn-input")}, sendMessage);
     $("#btn-start").click({author: "auth"}, initChat);
@@ -8,8 +9,28 @@ $(document).ready(function() {
     $('#btn-input').prop('disabled', true);
 });
 
+function getCurrentTime() {
+    var date = new Date();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    if(hour.toString().length == 1) {
+        hour = '0'+hour;
+    }
+    if(minute.toString().length == 1) {
+        minute = '0'+minute;
+    }
+    if(second.toString().length == 1) {
+        second = '0'+second;
+    }   
+    var time = hour + ":" + minute + ":" + second;
+    return time;
+}
+
 function sendMessage(event) {
-    var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"> <strong class="primary-font">' + event.data.author + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>12 mins ago</small> </div> <p>' + event.data.msg + '</p> </div> </li>'
+    var time = getCurrentTime();
+    var initial = event.data.author.substring(0,1);
+    var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/55C1E7/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"> <strong class="primary-font">' + event.data.author + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> <p>' + event.data.msg + '</p> </div> </li>'
 
     $(".chat").append(post);
     var chat = document.getElementById("chat-body");
@@ -43,6 +64,9 @@ function setResponsesLeft(value) {
     $('#responses-val').text(value);
     var percentage = value/10 * 100;
     $('#responses-bar').css("width", percentage + "%");
+    if (value <= 5 && !$("#is-bot-dialog").is(":visible")) {
+        $("#is-bot-dialog").show(600, "swing");
+    }
 }
 
 function initChat(event) {
@@ -62,9 +86,12 @@ function initChat(event) {
     $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
   });
   
+    //set up time/response limit
    setTimer(10);
    setResponsesLeft(10);
-   setInterval(tickTimer(), 1000);
+    setTimeout(function(){
+        setInterval(tickTimer(), 1000);
+    }, 3000);
 
    var socket = new WebSocket('ws://10.192.216.241:5000');
    socket.send("xd");
