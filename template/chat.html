@@ -9,10 +9,38 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 
   </head>
-  <body>
-<div class="container-fluid">
+  <body style="font-family: 'Titillium Web', sans-serif;">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Turing League</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+       <div class="jumbotron">
+      <div class="container">
+        <h1>Turing League</h1>
+        <p>fight against robots ahahahhahahahh xdxdxdxd</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Start chatting</a></p>
+      </div>
+    </div> 
+
+
+
+    <div class="container-fluid">
     <div class="row">
         <div class="col-md-10">
             <div class="panel panel-primary">
@@ -63,8 +91,11 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <h2>Time left: </h2> 10
-                <h2>Responses left: </h2> 10
+                <h2 id="time-left">Time left: </h2>
+                <div class="progress progress-striped">
+                    <div class="progress-bar" style="width: 60%;" aria-describedby="time-left"></div>
+                </div>
+                <h2>Responses left: </h2> 5/7
                 <h2>Is this a bot?</h2>
                 <div class="row">
                     <div class="col-md-6">
