@@ -1,11 +1,15 @@
 var socket;
 var user;
 var role;
+var timer;
 
 $(document).ready(function() {
     socket = null;
     user = "";
     role = "";
+
+    $("#main-chat").hide();
+    $("#is-bot-dialog").hide();
 
     $("#btn-start").click(function() {
         setNickname();
@@ -15,12 +19,10 @@ $(document).ready(function() {
         setMessage();
     });
 
-    $("#btn-yes").click(replyYes);
-    $("btn-no").click(replyNo);
+    $("#btn-yes").click(replyYes());
+    $("#btn-no").click(replyNo());
 
     disableChat(true);
-    $("#main-chat").hide();
-    $("#is-bot-dialog").hide();
 });
 
 $(document).keydown(function(e) {
@@ -32,6 +34,12 @@ $(document).keydown(function(e) {
         }
     }
 });
+
+$(window).unload(function() {
+    if (socket !== null) {
+        socket.emit('loss', { message : 'disconnect' });
+    }
+})
 
 function sendSystemMessage(msg, color) {
     var initial = '!';
@@ -57,6 +65,18 @@ function setMessage() {
     }
 }
 
+function turnTimeout() {
+    socket.emit('loss', { message : 'timeout' });
+    sendSystemMessage("Time limit over! YOU LOSE!", "AA2222");
+    finishGame();
+}
+
+function finishGame() {
+    disableChat(true);
+    clearInterval(timer);
+    setResponsesLeft(0);
+}
+
 function getCurrentTime() {
     var date = new Date();
     var hour = date.getHours();
@@ -77,34 +97,41 @@ function getCurrentTime() {
 
 function sendMessage(author, msg) {
     disableChat(true);    
+    displayMessage(author, msg, "55C1E7");
     socket.emit('message_submitted', { user : user, message : msg });
-    var time = getCurrentTime();
-    var initial = author.substring(0,1);
-    var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/55C1E7/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"> <strong class="primary-font">' + author + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> <p>' + msg + '</p> </div> </li>'
-
-    $(".chat").append(post);
-    var chat = document.getElementById("chat-body");
-    chat.scrollTop = chat.scrollHeight;
-
     var curr = $('#responses-val').text();
     if (curr > 0) {
         setResponsesLeft(curr - 1);
     }
 
     $("#btn-input").val("");
-    setTimer(10);
+    setTimer(20);
+    clearInterval(timer);
+}
+
+function displayMessage(author, msg, color) {
+    var time = getCurrentTime();
+    var initial = author.substring(0,1);
+    var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/'+ color +'/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"> <strong class="primary-font">' + author + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> <p>' + msg + '</p> </div> </li>'
+
+    $(".chat").append(post);
+    var chat = document.getElementById("chat-body");
+    chat.scrollTop = chat.scrollHeight;
 }
 
 function tickTimer() {
     var curr = $('#time-val').text();
     if (curr > 0) {
         setTimer(curr - 1);
+    } else {
+        turnTimeout();
+        clearInterval(timer);
     }
 }
 
 function setTimer(time) {
     $('#time-val').text(time);
-    var percentage = time/10 * 100;
+    var percentage = time/20 * 100;
     $('#time-bar').css("width", percentage + "%");
 }
 
@@ -120,16 +147,23 @@ function setResponsesLeft(value) {
   $('#responses-val').text(value);
   var percentage = value/10 * 100;
   $('#responses-bar').css("width", percentage + "%");
-  if (value <= 5 && !$("#is-bot-dialog").is(":visible")) {
+  if (value <= 5 && !$("#is-bot-dialog").is(":visible") && role === "attacker") {
     $("#is-bot-dialog").show(600, "swing");
+  }
+  if (value == 0) {
+      disableChat(true);
   }
 }
 
 function initChat(nickname) { 
-  $('#nickname-input').prop('disabled', true);
-  $('#btn-start').prop('disabled', true);
+  disableChat(true);
 
-  $(".jumbotron").css("height", "320px");
+  $('#nickname-field').hide();
+
+  $(".jumbotron").css("height", "200px");
+  $(".jumbotron").css("margin-bottom", "60px");
+  $("#jumbo-title").css("margin-top", "20px");
+
   $("#main-chat").show(600, function() {
     $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
   });
@@ -151,15 +185,19 @@ function initChat(nickname) {
 
   //Let user know role once game starts
   socket.on('started', function(data) {
-    sendSystemMessage("Game started. Role: " + data.role, "22AA22");
+    var msg = "";
     if(data.role === "attacker") {
+        msg = "Figure out if you're chatting with another human or a bot!";
         disableChat(false);
+    } else {
+        msg = "Convince the other person that you're a bot!";
     }
+    sendSystemMessage(msg, "E0F500");
   });
 
   //Add received message to chat
   socket.on('message_received', function(data) {
-    $(".chat").append(data.message);
+    displayMessage("Opponent", data.message, "F5BC00");
     disableChat(false);
     startTimer();
   });
@@ -167,24 +205,17 @@ function initChat(nickname) {
   //Tell user result of game
   socket.on('finished', function(data) {
     if(data.win) {
-      $(".chat").append("YOU WIN!");
+        sendSystemMessage("You win!", "22AA22");
     } else {
-      $(".chat").append("YOU LOSE!");
+        sendSystemMessage("You lose!", "AA2222");
     }
-
   });
 }
 
-function showSystemMessage(msg) {
-
-}
-
 function startTimer() {
-  setTimer(10);
-  setTimeout(function() {
-    setInterval(function() {
-        tickTimer(); }, 1000);
-  }, 3000);
+  setTimer(20);
+  timer = setInterval(function() {
+      tickTimer(); }, 1000);
 }
 
 function disableChat(disabled) {

@@ -1,18 +1,23 @@
 body {
-    padding-top: 40px;
     background-color: #ccccee
 }
 
 @media (max-width: 979px) {
     body {
             padding-top: 0px;
-        }
+    }
 }
 
 .jumbotron {
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/9/92/TOPIO_3.jpg");
     color: #ffffff;
     height: 100vh;
+    -webkit-transition: 1s;
+    margin-bottom: 0px;
+}
+
+#jumbo-title {
+    margin-top: 100px;
     -webkit-transition: 1s;
 }
 
