@@ -14,11 +14,43 @@ function sendMessage(event) {
     $(".chat").append(post);
     var chat = document.getElementById("chat-body");
     chat.scrollTop = chat.scrollHeight;
+    tickResponsesLeft();
+    setTimer(10);
+}
+
+function tickTimer() {
+    var curr = $('#time-val').text();
+    if (curr > 0) {
+        setTimer(curr - 1);
+    }
+}
+
+function tickResponsesLeft() {
+    var curr = $('#responses-val').text();
+    if (curr > 0) {
+        setResponsesLeft(curr - 1);
+    }
+
+}
+
+function setTimer(time) {
+    $('#time-val').text(time);
+    var percentage = time/10 * 100;
+    $('#time-bar').css("width", percentage + "%");
+}
+
+function setResponsesLeft(value) {
+    $('#responses-val').text(value);
+    var percentage = value/10 * 100;
+    $('#responses-bar').css("width", percentage + "%");
 }
 
 function initChat(event) {
   $('#btn-chat').prop('disabled', false);
   $('#btn-input').prop('disabled', false);
+
+  $('#nickname-input').prop('disabled', true);
+  $('#btn-start').prop('disabled', true);
 
   //colorize
   $("#chat-panel").css("background-color", "#337AB7");
@@ -30,13 +62,17 @@ function initChat(event) {
     $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
   });
   
-  var socket = new WebSocket('ws://10.192.216.241:5000');
-  socket.send("xd");
-  socket.onopen = function() {
-    alert("connected");
-     socket.send("h a r a m b e w a s i n n o c e n t");
-  }
-  socket.onmessage = function(event) {
-    alert("eeeeeeyyyyy");
-  }
+   setTimer(10);
+   setResponsesLeft(10);
+   setInterval(tickTimer(), 1000);
+
+   var socket = new WebSocket('ws://10.192.216.241:5000');
+   socket.send("xd");
+   socket.onopen = function() {
+     alert("connected");
+      socket.send("h a r a m b e w a s i n n o c e n t");
+   }
+   socket.onmessage = function(event) {
+     alert("eeeeeeyyyyy");
+   }
 }
