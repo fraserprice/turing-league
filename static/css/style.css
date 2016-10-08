@@ -20,6 +20,15 @@ body {
     margin-right: 15px;
 }
 
+#chat-panel {
+    background-color: #222222;
+    border-bottom: #222222;
+}
+
+.panel {
+    border-color: #222222;
+}
+
 .chat
 {
     list-style: none;
@@ -62,10 +71,6 @@ body {
     height: 450px;
 }
 
-.panel {
-    border-color: #777777;
-}
-
 .side-chat {
     margin-right: 10px;
     margin-left: 10px;
@@ -98,11 +103,6 @@ body {
 .progress-text {
     color: #ffffff;
     font-size: 15px;
-}
-
-#chat-panel {
-    background-color: #777777;
-    border-bottom: #777777;
 }
 
 button:focus {

@@ -2,6 +2,7 @@ var socket;
 var user;
 
 $(document).ready(function() {
+    user = "";
 
     socket = null;
     user = "";
@@ -22,7 +23,7 @@ $(document).ready(function() {
     $("#is-bot-dialog").hide();
 });
 
-$(document).keypress(function(e) {
+$(document).keydown(function(e) {
     if(e.which == 13) {
         if (user === "") {
             setNickname();
@@ -129,10 +130,6 @@ function initChat(nickname) {
   $('#nickname-input').prop('disabled', true);
   $('#btn-start').prop('disabled', true);
 
-  $("#chat-panel").css("background-color", "#337AB7");
-  $("#chat-panel").css("border-bottom", "#337AB7");
-  $(".panel").css("border-color", "#337AB7");
-
   $(".jumbotron").css("height", "320px");
   $("#main-chat").show(600, function() {
     $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
@@ -176,10 +173,15 @@ function initChat(nickname) {
   });
 }
 
+function showSystemMessage(msg) {
+
+}
+
 function startTimer() {
   setTimer(10);
   setTimeout(function() {
-    setInterval(tickTimer(), 1000);
+    setInterval(function() {
+        tickTimer(); }, 1000);
   }, 3000);
 }
 
