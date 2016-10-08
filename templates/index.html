@@ -39,10 +39,12 @@
         <h1>Turing League</h1>
         <p>fight against robots</p>
         <p>
-        <form class="form-inline">
-           <input id="nickname-input" type="text" class="form-control input-lg" placeholder="Nickname">
-            <a class="btn btn-primary btn-lg" id="btn-start" href="#" role="button">Start chatting</a>
-        </form>
+        <div class="row">
+            <div class="col-md-4">
+            <input id="nickname-input" type="text" class="form-control input-lg" placeholder="Nickname">
+            </div>
+            <button class="btn btn-primary btn-lg" id="btn-start" href="#" role="button">Start chatting</button>
+        </div>
         </p>
       </div>
     </div> 
@@ -56,20 +58,6 @@
                 </div>
                 <div class="panel-body" id="chat-body">
                     <ul class="chat">
-                        <li class="left clearfix">
-                            <span class="chat-img pull-left">
-                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-                            </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">Server</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>now</small>
-                                </div>
-                                <p id="server-message">
-                                    Waiting for an opponent...
-                                </p>
-                            </div>
-                        </li>
                     </ul>
                 </div>
                 <div class="panel-footer">

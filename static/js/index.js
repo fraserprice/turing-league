@@ -1,7 +1,10 @@
 var socket;
-var user = "";
+var user;
 
 $(document).ready(function() {
+
+    socket = null;
+    user = "";
 
     $("#btn-start").click(function() {
         setNickname();
@@ -64,6 +67,7 @@ function getCurrentTime() {
 }
 
 function sendMessage(author, msg) {
+    disableChat(true);    
     socket.emit('message_submitted', { message : msg });
     var time = getCurrentTime();
     var initial = author.substring(0,1);
@@ -113,8 +117,7 @@ function setResponsesLeft(value) {
 }
 
 function initChat(nickname) { 
-  $('#btn-chat').prop('disabled', false);
-  $('#btn-input').prop('disabled', false);
+  disableChat(false);
   $('#nickname-input').prop('disabled', true);
   $('#btn-start').prop('disabled', true);
 
