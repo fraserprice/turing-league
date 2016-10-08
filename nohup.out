@@ -5297,3 +5297,78 @@ error: [Errno 48] Address already in use: ('0.0.0.0', 5000)
 127.0.0.1 - - [2016-10-08 17:22:26] "POST /socket.io/?EIO=3&transport=polling&t=LUaurn7&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000263
 127.0.0.1 - - [2016-10-08 17:22:26] "GET /socket.io/?EIO=3&transport=polling&t=LUaulgj&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 24.977979
 127.0.0.1 - - [2016-10-08 17:22:33] "GET /socket.io/?EIO=3&transport=polling&t=LUauers&sid=849e319a734245e3b8ead1c7a0e5d8ad HTTP/1.1" 400 197 60.002066
+127.0.0.1 - - [2016-10-08 17:22:51] "POST /socket.io/?EIO=3&transport=polling&t=LUauxtv&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000282
+127.0.0.1 - - [2016-10-08 17:22:51] "GET /socket.io/?EIO=3&transport=polling&t=LUaurnE&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.004409
+127.0.0.1 - - [2016-10-08 17:23:16] "POST /socket.io/?EIO=3&transport=polling&t=LUav1-f&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000274
+127.0.0.1 - - [2016-10-08 17:23:16] "GET /socket.io/?EIO=3&transport=polling&t=LUauxt_&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.003047
+127.0.0.1 - - [2016-10-08 17:23:41] "POST /socket.io/?EIO=3&transport=polling&t=LUav85Q&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000281
+127.0.0.1 - - [2016-10-08 17:23:41] "GET /socket.io/?EIO=3&transport=polling&t=LUav1-l&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.003337
+127.0.0.1 - - [2016-10-08 17:24:07] "POST /socket.io/?EIO=3&transport=polling&t=LUavEUw&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000277
+127.0.0.1 - - [2016-10-08 17:24:07] "GET /socket.io/?EIO=3&transport=polling&t=LUav85V&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 26.203798
+127.0.0.1 - - [2016-10-08 17:24:33] "POST /socket.io/?EIO=3&transport=polling&t=LUavKll&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000276
+127.0.0.1 - - [2016-10-08 17:24:33] "GET /socket.io/?EIO=3&transport=polling&t=LUavEV0&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.647767
+127.0.0.1 - - [2016-10-08 17:24:59] "POST /socket.io/?EIO=3&transport=polling&t=LUavR5z&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000285
+127.0.0.1 - - [2016-10-08 17:24:59] "GET /socket.io/?EIO=3&transport=polling&t=LUavKlr&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.992438
+127.0.0.1 - - [2016-10-08 17:25:25] "POST /socket.io/?EIO=3&transport=polling&t=LUavXRQ&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000284
+127.0.0.1 - - [2016-10-08 17:25:25] "GET /socket.io/?EIO=3&transport=polling&t=LUavR69&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.936706
+127.0.0.1 - - [2016-10-08 17:25:51] "POST /socket.io/?EIO=3&transport=polling&t=LUavdta&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000282
+127.0.0.1 - - [2016-10-08 17:25:51] "GET /socket.io/?EIO=3&transport=polling&t=LUavXRV&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 26.372907
+127.0.0.1 - - [2016-10-08 17:26:17] "POST /socket.io/?EIO=3&transport=polling&t=LUavkDs&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000369
+127.0.0.1 - - [2016-10-08 17:26:17] "GET /socket.io/?EIO=3&transport=polling&t=LUavdtg&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.998015
+127.0.0.1 - - [2016-10-08 17:26:43] "POST /socket.io/?EIO=3&transport=polling&t=LUavqaF&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000352
+127.0.0.1 - - [2016-10-08 17:26:43] "GET /socket.io/?EIO=3&transport=polling&t=LUavkDz&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 26.003891
+127.0.0.1 - - [2016-10-08 17:27:08] "POST /socket.io/?EIO=3&transport=polling&t=LUavwiF&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000284
+127.0.0.1 - - [2016-10-08 17:27:08] "GET /socket.io/?EIO=3&transport=polling&t=LUavqaN&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.079020
+127.0.0.1 - - [2016-10-08 17:27:34] "POST /socket.io/?EIO=3&transport=polling&t=LUaw0xe&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000296
+127.0.0.1 - - [2016-10-08 17:27:34] "GET /socket.io/?EIO=3&transport=polling&t=LUavwiK&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.556432
+127.0.0.1 - - [2016-10-08 17:27:59] "POST /socket.io/?EIO=3&transport=polling&t=LUaw74v&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000296
+127.0.0.1 - - [2016-10-08 17:27:59] "GET /socket.io/?EIO=3&transport=polling&t=LUaw0xk&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.164912
+127.0.0.1 - - [2016-10-08 17:28:24] "POST /socket.io/?EIO=3&transport=polling&t=LUawDBk&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000287
+127.0.0.1 - - [2016-10-08 17:28:24] "GET /socket.io/?EIO=3&transport=polling&t=LUaw750&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.006725
+127.0.0.1 - - [2016-10-08 17:28:49] "POST /socket.io/?EIO=3&transport=polling&t=LUawJKv&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000348
+127.0.0.1 - - [2016-10-08 17:28:49] "GET /socket.io/?EIO=3&transport=polling&t=LUawDBq&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.166789
+127.0.0.1 - - [2016-10-08 17:29:14] "POST /socket.io/?EIO=3&transport=polling&t=LUawPZT&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000280
+127.0.0.1 - - [2016-10-08 17:29:14] "GET /socket.io/?EIO=3&transport=polling&t=LUawJL9&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.499409
+127.0.0.1 - - [2016-10-08 17:29:40] "POST /socket.io/?EIO=3&transport=polling&t=LUawVki&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000481
+127.0.0.1 - - [2016-10-08 17:29:40] "GET /socket.io/?EIO=3&transport=polling&t=LUawPZg&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.284864
+127.0.0.1 - - [2016-10-08 17:30:06] "POST /socket.io/?EIO=3&transport=polling&t=LUawc88&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000420
+127.0.0.1 - - [2016-10-08 17:30:06] "GET /socket.io/?EIO=3&transport=polling&t=LUawVkq&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 26.198142
+127.0.0.1 - - [2016-10-08 17:30:32] "POST /socket.io/?EIO=3&transport=polling&t=LUawiP5&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000366
+127.0.0.1 - - [2016-10-08 17:30:32] "GET /socket.io/?EIO=3&transport=polling&t=LUawc8F&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.664349
+127.0.0.1 - - [2016-10-08 17:30:57] "POST /socket.io/?EIO=3&transport=polling&t=LUawocL&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000409
+127.0.0.1 - - [2016-10-08 17:30:57] "GET /socket.io/?EIO=3&transport=polling&t=LUawiPK&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.424821
+127.0.0.1 - - [2016-10-08 17:31:23] "POST /socket.io/?EIO=3&transport=polling&t=LUawus9&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 178 0.000797
+127.0.0.1 - - [2016-10-08 17:31:23] "GET /socket.io/?EIO=3&transport=polling&t=LUawoci&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 200 194 25.574424
+127.0.0.1 - - [2016-10-08 17:32:23] "GET /socket.io/?EIO=3&transport=polling&t=LUawusQ&sid=662746edf07b4996bb40892512f4b8d1 HTTP/1.1" 400 197 60.003926
+ * Detected change in '/Users/fraser/Documents/TuringLeague/app.py', reloading
+ * Detected change in '/Users/fraser/Documents/TuringLeague/app.py', reloading
+('Client disconnected', '8f4d02fe45d4471eb701a6aa17f4269b')
+ * Restarting with stat
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger is active!
+ * Debugger pin code: 236-058-013
+ * Debugger pin code: 236-058-013
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+    self.run()
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/threading.py", line 754, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/flask_socketio/__init__.py", line 504, in run_server
+    self.wsgi_server.serve_forever()
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/gevent/baseserver.py", line 347, in serve_forever
+    self.start()
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/gevent/baseserver.py", line 291, in start
+    self.init_socket()
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/gevent/pywsgi.py", line 1222, in init_socket
+    StreamServer.init_socket(self)
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/gevent/server.py", line 80, in init_socket
+    self.socket = self.get_listener(self.address, self.backlog, self.family)
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/gevent/server.py", line 91, in get_listener
+    return _tcp_listener(address, backlog=backlog, reuse_addr=self.reuse_addr, family=family)
+  File "/Users/fraser/Documents/TuringLeague/venv/lib/python2.7/site-packages/gevent/server.py", line 177, in _tcp_listener
+    sock.bind(address)
+  File "<string>", line 1, in bind
+error: [Errno 48] Address already in use: ('0.0.0.0', 5000)
+
