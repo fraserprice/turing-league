@@ -2,6 +2,7 @@ var socket;
 var user;
 
 $(document).ready(function() {
+    user = "";
 
     socket = null;
     user = "";
@@ -22,7 +23,7 @@ $(document).ready(function() {
     $("#is-bot-dialog").hide();
 });
 
-$(document).keypress(function(e) {
+$(document).keydown(function(e) {
     if(e.which == 13) {
         if (user === "") {
             setNickname();
@@ -31,6 +32,14 @@ $(document).keypress(function(e) {
         }
     }
 });
+
+function sendSystemMessage(msg, color) {
+    var initial = '!';
+    var time = getCurrentTime();
+    var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/' + color + '/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix" style="margin-top: 12px;"> <strong class="primary-font" style="font-size: 20px">' + msg + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> </li>'
+
+    $(".chat").append(post);
+}
 
 function setNickname() {
     var nick = $("#nickname-input").val(); 
@@ -121,10 +130,6 @@ function initChat(nickname) {
   $('#nickname-input').prop('disabled', true);
   $('#btn-start').prop('disabled', true);
 
-  $("#chat-panel").css("background-color", "#337AB7");
-  $("#chat-panel").css("border-bottom", "#337AB7");
-  $(".panel").css("border-color", "#337AB7");
-
   $(".jumbotron").css("height", "320px");
   $("#main-chat").show(600, function() {
     $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
@@ -134,7 +139,11 @@ function initChat(nickname) {
   socket = io.connect('http://localhost:5000/chat');
 
   socket.on('connect', function() {
-    $(".chat").append("Connected!");
+      sendSystemMessage("Connected!", "22AA22");
+  });
+
+  socket.on('disconnect', function() {
+      sendSystemMessage("Disconnected!", "AA2222");
   });
 
   //Send game start request
@@ -164,10 +173,15 @@ function initChat(nickname) {
   });
 }
 
+function showSystemMessage(msg) {
+
+}
+
 function startTimer() {
   setTimer(10);
   setTimeout(function() {
-    setInterval(tickTimer(), 1000);
+    setInterval(function() {
+        tickTimer(); }, 1000);
   }, 3000);
 }
 

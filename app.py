@@ -2,7 +2,13 @@ from flask import Flask, render_template, session, request, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
     close_room, rooms, disconnect
 from threading import Timer
-from db import database
+from player import Player
+from human import Human
+from chatbot import ChatBot
+from bots import bot
+from game import Game
+import random
+# from db import database
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
@@ -13,20 +19,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 
-user_to_session = {}
-games = []
-users_waiting = []
-user_to_matching_thread = {}
+players_in_game = {} # username -> game
+players_in_lobby = {} # username -> timer
+username_to_player = {} # username -> player
 db = database.Database()
-
-def create_bot_game(username):
-    print 'creating a bot game'
-    # games.append(Game(username, # random bot))
-    # TODO: create a bot game
-    users_waiting.remove(username)
-
-def started(username, role):
-    emit('started', {'role': role}, namespace='/chat')
 
 @app.route('/')
 def index():
@@ -49,20 +45,25 @@ def start_request(message):
     print 'start request'
 
     username = message['nickname']
-    # TODO: uniquely identify user socket
-    # user_to_session[username] = request.namespace
 
-    if not username in users_waiting:
-        if not users_waiting:
-            print 'adding user to queue...'
-            users_waiting.append(username)
-            user_to_matching_thread[username] = Timer(30.0, create_bot_game, username)
+    if not (username in players_in_game) or (username in players_in_lobby):
+        player = Human(username, lambda event, data : emit(event, data, room=request.sid))
+        username_to_player[username] = player
+
+        if not players_in_lobby:
+            print 'adding ' + username  + ' to lobby...'
+            players_in_lobby[player.name()] = Timer(30.0, create_bot_game, player)
+
         else:
-            print 'matching user'
-            other_player = users_waiting[0]
-            users_to_matching_thread[other_player].cancel()
-            games.append(Game(username, other_player))
-            users_waiting.remove(other_player)
+            # remove first player form lobby
+            opponent_username, opponent_timer = players_in_lobby.items()[0]
+            opponent_timer.cancel()
+            opponent = username_to_player[opponent_username]
+
+            print 'matching ' + player.name() + ' with ' + opponent.name()
+            game = Game(player, opponent)
+            players_in_game[player] = game
+            players_in_game[opponent] = game
             
 @socketio.on('message_submitted', namespace='/chat')
 def message_submitted(message):
@@ -90,6 +91,12 @@ def socket_connect():
 @socketio.on('disconnect', namespace='/chat')
 def socket_disconnect():
     print 'disconnect'
+
+def create_bot_game(player):
+    print player.name() + ' will play a bot game'
+    random_bot = random.choice(bot.BOTS)
+    chatbot = ChatBot(random_bot.bot_type(), random_bot.start_session())
+    players_in_game[player] = Game(player, chatbot)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0')
