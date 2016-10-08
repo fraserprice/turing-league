@@ -92,30 +92,39 @@ function initChat(event) {
   $("#main-chat").show(600, function() {
     $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
   });
-  
-  socket = io('http://localhost:5000/chat');
-  socket.emit("start_request", { nickname: "TODO" });
 
+  //Connect to socket
+  socket = io.connect('http://localhost:5000/chat');
+
+  //Send game start request
+  socket.emit("start_request", { nickname: event.data.nickname });
+  setResponsesLeft(10);
+
+  //Let user know role once game starts
   socket.on('started', function(data) {
     $('#server-message').text('Your role: ${data.role}');
   });
 
-  socket.on('message_request', function(data) {
-    var timeout = "TODO";
-  });
-
+  //Add received message to chat
   socket.on('message_received', function(data) {
-    $(".chat").append("TODO");
+    $(".chat").append(data.message);
+    startTimer();
   });
 
+  //Tell user result of game
   socket.on('finished', function(data) {
-    $(".chat").append("TODO");
-  });
+    if(data.win) {
+      $(".chat").append("YOU WIN!");
+    } else {
+      $(".chat").append("YOU LOSE!");
+    }
 
-  //set up time/response limit
+  });
+}
+
+function startTimer() {
   setTimer(10);
-  setResponsesLeft(10);
-    setTimeout(function() {
-      setInterval(tickTimer(), 1000);
-    }, 3000);
+  setTimeout(function() {
+    setInterval(tickTimer(), 1000);
+  }, 3000);
 }
