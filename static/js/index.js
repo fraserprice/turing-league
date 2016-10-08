@@ -93,7 +93,7 @@ function initChat(event) {
     $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
   });
   
-  socket = io('http://localhost:5000');
+  socket = io('http://localhost:5000/chat');
   socket.emit("start_request", { nickname: "TODO" });
 
   socket.on('started', function(data) {
