@@ -1,6 +1,6 @@
 body {
     padding-top: 40px;
-    background-color: #666666
+    background-color: #ccccee
 }
 
 @media (max-width: 979px) {
@@ -72,9 +72,9 @@ body {
     margin-bottom: 15px;
     border-radius: 10px;
     padding: 10px;
-    background-color: #222222;
+    background-color: #444444;
     color: #ffffff;
-    border: 1px solid #337ab7;
+    border: 1px solid #ffffff;
 }
 
 ::-webkit-scrollbar-track
