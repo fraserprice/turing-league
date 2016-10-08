@@ -26,7 +26,7 @@ def background_thread():
 def index():
     return render_template('index.html', async_mode=socketio.async_mode)
 
-@socketio.on('start request', namespace='/chat')
+@socketio.on('start_request', namespace='/chat')
 def start_request(message):
     print 'start request'
     # TODO: start matchmaking process
@@ -35,13 +35,13 @@ def start_request(message):
     #     thread = socketio.start_background_task(target=background_thread)
     print message['nickname']
 
-@socketio.on('message submitted', namespace='/chat')
+@socketio.on('message_submitted', namespace='/chat')
 def message_submitted(message):
     print 'message submitted'
     # TODO: notify game
     print message['message']
 
-@socketio.on('bot decision', namespace='/chat')
+@socketio.on('bot_decision', namespace='/chat')
 def bot_decision(message):
     print 'bot decision'
     # TODO: notify game
