@@ -1,8 +1,6 @@
 $(document).ready(function() {
-    $("#btn-chat").click({author: "asdf", msg: $("#btn-input").text}, sendMessage);
-    $("#btn-start").click(function() {
-        $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
-    });
+    $("#btn-chat").click({author: "asdf", msg: $("#btn-input")}, sendMessage);
+    $("#btn-start").click({author: "auth"}, initChat);
 });
 
 function sendMessage(event) {
@@ -11,4 +9,17 @@ function sendMessage(event) {
     $(".chat").append(post);
     var chat = document.getElementById("chat-body");
     chat.scrollTop = chat.scrollHeight;
+}
+
+function initChat(event) {
+  $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
+  var socket = new WebSocket('ws://10.192.216.241:5000');
+  socket.send("xd");
+  socket.onopen = function() {
+    alert("connected");
+     socket.send("h a r a m b e w a s i n n o c e n t");
+  }
+  socket.onmessage = function(event) {
+    alert("eeeeeeyyyyy");
+  }
 }
