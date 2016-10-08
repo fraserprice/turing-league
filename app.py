@@ -30,6 +30,10 @@ def started(username, role):
 def index():
     return render_template('index.html', async_mode=socketio.async_mode)
 
+@app.route('/highscores')
+def highscores():
+    return render_template('highscores.html')
+
 @app.route('/leaderboards/bots', methods=['GET'])
 def get_best_bots():
     return jsonify({'message' : 'it fucking works'})
