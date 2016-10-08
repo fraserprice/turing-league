@@ -1,10 +1,13 @@
 $(document).ready(function() {
     $("#btn-chat").click({author: "asdf", msg: $("#btn-input").text}, sendMessage);
-    $('#btn-chat').prop('disabled', true);
     $("#btn-start").click(function() {
         $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
         startChat();
     });
+
+    //disable chat
+    $('#btn-chat').prop('disabled', true);
+    $('#btn-input').prop('disabled', true);
 });
 
 function sendMessage(event) {
@@ -17,6 +20,7 @@ function sendMessage(event) {
 
 function startChat() {
     $('#btn-chat').prop('disabled', false);
+    $('#btn-input').prop('disabled', false);
 
     //colorize
     $("#chat-panel").css("background-color", "#337AB7");
