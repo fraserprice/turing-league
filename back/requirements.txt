@@ -3,6 +3,10 @@ Flask_SocketIO
 itsdangerous==0.24
 Jinja2==2.7.3
 MarkupSafe==0.23
+Werkzeug==0.11.11
+mysq==14.14
+git clone https://github.com/pierredavidbelanger/chatter-bot-apil
+MySQL-Python
 python-engineio
 python-socketio
 six==1.9.0
