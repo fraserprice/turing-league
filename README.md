@@ -1,3 +1,1 @@
-# Turing League
-
-TODO:
+Uses python 3.5.
