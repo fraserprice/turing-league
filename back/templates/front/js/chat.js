@@ -1,6 +1,10 @@
 $(document).ready(function() {
+
     $("#btn-chat").click({author: "asdf", msg: $("#btn-input")}, sendMessage);
     $("#btn-start").click({author: "auth"}, initChat);
+
+    $('#btn-chat').prop('disabled', true);
+    $('#btn-input').prop('disabled', true);
 });
 
 function sendMessage(event) {
@@ -12,7 +16,16 @@ function sendMessage(event) {
 }
 
 function initChat(event) {
+  $('#btn-chat').prop('disabled', false);
+  $('#btn-input').prop('disabled', false);
+
+  //colorize
+  $("#chat-panel").css("background-color", "#337AB7");
+  $("#chat-panel").css("border-bottom", "#337AB7");
+  $(".panel").css("border-color", "#337AB7");
+
   $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
+  
   var socket = new WebSocket('ws://10.192.216.241:5000');
   socket.send("xd");
   socket.onopen = function() {
