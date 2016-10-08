@@ -11,14 +11,6 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script src="js/chat.js"></script>
-
-
   </head>
   <body style="font-family: 'Titillium Web', sans-serif;">
 
@@ -64,31 +56,17 @@
                 </div>
                 <div class="panel-body" id="chat-body">
                     <ul class="chat">
-                        <li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-                        </span>
+                        <li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                            </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                    <strong class="primary-font">Server</strong> <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>now</small>
                                 </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
+                                <p id="server-message">
+                                    Waiting for an opponent...
                                 </p>
                             </div>
                         </li>
@@ -96,7 +74,7 @@
                 </div>
                 <div class="panel-footer">
                     <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control" placeholder="Search for...">
+                        <input id="btn-input" type="text" class="form-control" placeholder="Talk...">
                         <span class="input-group-btn">
                             <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
                         </span>
@@ -125,8 +103,8 @@
                     <h2 class="text-center">Is this a bot?</h2>
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <button type="button" class="btnyes">Yes</button>
-                            <button type="button" class="btnno">No</button>
+                            <button type="button" class="btnyes" id="btn-yes">Yes</button>
+                            <button type="button" class="btnno" id="btn-no">No</button>
                         </div>
                     </div>
                 </div>
@@ -134,5 +112,12 @@
         </div>
     </div>
 
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
