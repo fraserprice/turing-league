@@ -1,7 +1,8 @@
-from flask import Flask, render_template, session, request
+from flask import Flask, render_template, session, request, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
     close_room, rooms, disconnect
 from threading import Timer
+from db import database
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
@@ -16,9 +17,12 @@ user_to_session = {}
 games = []
 users_waiting = []
 user_to_matching_thread = {}
+db = database.Database()
 
 def create_bot_game(username):
+    print 'creating a bot game'
     # games.append(Game(username, # random bot))
+    # TODO: create a bot game
     users_waiting.remove(username)
 
 def started(username, role):
@@ -28,18 +32,33 @@ def started(username, role):
 def index():
     return render_template('index.html', async_mode=socketio.async_mode)
 
+@app.route('/highscores')
+def highscores():
+    return render_template('highscores.html')
+
+@app.route('/leaderboards/bots', methods=['GET'])
+def get_best_bots():
+    return db.get_top_bots_table()
+
+@app.route('/leaderboards/users', methods=['GET'])
+def get_best_users():
+    return db.get_top_users_table()
+
 @socketio.on('start_request', namespace='/chat')
 def start_request(message):
     print 'start request'
 
     username = message['nickname']
-    user_to_session[username] = request.namespace
+    # TODO: uniquely identify user socket
+    # user_to_session[username] = request.namespace
 
     if not username in users_waiting:
         if not users_waiting:
+            print 'adding user to queue...'
             users_waiting.append(username)
             user_to_matching_thread[username] = Timer(30.0, create_bot_game, username)
         else:
+            print 'matching user'
             other_player = users_waiting[0]
             users_to_matching_thread[other_player].cancel()
             games.append(Game(username, other_player))
