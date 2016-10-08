@@ -4,11 +4,11 @@ from database import Database
 
 db = Database()
 
-top_users = db.get_top_users_table()
-print(top_users)
+#top_users = db.get_top_users_table()
+#print(top_users)
 
-top_bots = db.get_top_bots_table()
-print(top_bots)
+#top_bots = db.get_top_bots_table()
+#print(top_bots)
 
 #print(db.get_best_user())
 
@@ -21,3 +21,6 @@ print(top_bots)
 #db.increment_bot_wins('Optimus Prime')
 
 #db.increment_bot_loses('Optimus Prime')
+
+db.add_user("Mia")
+db.add_bot("Schooby", "cleverbot")

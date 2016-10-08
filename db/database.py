@@ -10,6 +10,18 @@ class Database:
                              passwd="TuringLeague69!",
                              db="turingleague_db")
 
+    def add_user(self, name):
+        cur = self.db.cursor()
+        query = "INSERT INTO user(id, name, wins, loses) values (NULL, '%s', 0, 0)" % (name)
+        cur.execute(query)
+        self.db.commit()
+
+    def add_bot(self, name, bot_type):
+        cur = self.db.cursor()
+        query = "INSERT INTO bot(id, name, type, wins, loses) values (NULL, '%s', '%s', 0, 0)" % (name, bot_type)
+        cur.execute(query)
+        self.db.commit()
+
     def get_top_users_table(self):
         cur = self.db.cursor()
         mat =  cur.execute(
