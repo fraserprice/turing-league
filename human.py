@@ -4,9 +4,10 @@ from flask_socketio import emit
 
 class Human(Player):
 
-    def __init__(self, name, sid):
+    def __init__(self, name, sid, db):
         super(Human, self).__init__(name, False)
         self._sid = sid
+        self._db = db
 
     def start_game(self, role, rounds):
         print 'sending start game to ' + self.name()
@@ -19,5 +20,11 @@ class Human(Player):
     def end_game(self, victory):
         print 'sending end game to ' + self.name()
         emit('finished', {'win' : victory}, room=self._sid)
-        # TODO: update stats
-        # TODO: update global data structure
+
+        if not self._db.does_user_exist(self.name()):
+            self._db.add_user(self.name())
+
+        if victory:
+            self._db.increment_user_wins(self.name())
+        else:
+            self._db.increment_user_loses(self.name())

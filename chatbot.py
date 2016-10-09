@@ -5,9 +5,11 @@ import random
 
 class ChatBot(Player):
 
-    def __init__(self, name, session):
+    def __init__(self, name, bot_type, session, db):
         super(ChatBot, self).__init__(name, True)
         self._session = session
+        self._bot_type = bot_type
+        self._db = db
 
     def set_game(self, game):
         self._game = game
@@ -20,5 +22,10 @@ class ChatBot(Player):
         self._game.defender_message(self._session.think(message))
 
     def end_game(self, victory):
-        # TODO: update stats
-        pass
+        if not self._db.does_bot_exist(self.name()):
+            self._db.add_bot(self.name(), self._bot_type)
+
+        if victory:
+            self._db.increment_bot_wins(self.name())
+        else:
+            self._db.increment_bot_loses(self.name())

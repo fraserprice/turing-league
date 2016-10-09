@@ -19,6 +19,7 @@ class Bot:
 
     def start_session(self):
         return self.bot.create_session()
-
-BOTS = [Bot("cleverbot"), Bot("pandorabots")]
-
+BOTS = [('CleverBot', Bot("cleverbot")),
+        ('PandoraBot', Bot("pandorabots")),
+        ('SmartBot', Bot("cleverbot")),
+        ('BigBot', Bot("pandorabots"))]
