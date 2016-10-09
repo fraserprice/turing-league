@@ -22,6 +22,7 @@ socketio = SocketIO(app, async_mode=async_mode)
 players_in_game = {} # username -> game
 players_in_lobby = [] # usernames
 username_to_player = {} # username -> player
+session_to_username = {}
 # db = database.Database()
 
 @app.route('/')
@@ -51,6 +52,7 @@ def start_request(message):
     if not (username in players_in_game) or (username in players_in_lobby):
         player = Human(username, request.sid)
         username_to_player[username] = player
+        session_to_username[request.sid] = username
 
         if not players_in_lobby:
             print 'adding ' + username  + ' to lobby...'
@@ -101,6 +103,7 @@ def socket_connect():
 @socketio.on('disconnect', namespace='/chat')
 def socket_disconnect():
     print 'disconnect'
+    players_in_game[username_to_player[message[session_to_username[request.sid]]]].player_forfeit(session_to_username[request.sid])
 
 def start_timer(timer):
     timer.start()
