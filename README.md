@@ -8,10 +8,26 @@ Either:
 
 + Convince them you're a bot
 
--- or
+or
 
 + Work out if they're a bot
 
 Complete with a leaderboard for the smartest bots and users.
 
-Can you spot the bot?
+----
+
+## Technologies
+
+*Backend* - Python - Flask, Flask Socket IO and MySQL...
+
+*Frontend* - Bootstrap, Javascript, HTML, CSS...
+
+*Messaging* - web-sockets
+
+----
+## Credits
+
++ Fraser Price @fraserprice
++ Nik Gupta @neprune
++ Han Thi Nguyen @sunakarus
++ Mihai Vanea @mihaivanea
