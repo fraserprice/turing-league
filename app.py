@@ -8,7 +8,7 @@ from chatbot import ChatBot
 from bots import bot
 from game import Game
 import random
-from db import database
+# from db import database
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
@@ -34,11 +34,13 @@ def highscores():
 
 @app.route('/leaderboards/bots', methods=['GET'])
 def get_best_bots():
-    return db.get_top_bots_table()
+    pass
+    # return db.get_top_bots_table()
 
 @app.route('/leaderboards/users', methods=['GET'])
 def get_best_users():
-    return db.get_top_users_table()
+    pass
+    # return db.get_top_users_table()
 
 @socketio.on('start_request', namespace='/chat')
 def start_request(message):
@@ -91,7 +93,6 @@ def bot_decision(message):
 @socketio.on('loss', namespace='/chat')
 def player_forfeit(message):
     players_in_game[username_to_player[message['user']]].player_forfeit(message['user'])
-    disconnect()
 
 @socketio.on('connect', namespace='/chat')
 def socket_connect():
