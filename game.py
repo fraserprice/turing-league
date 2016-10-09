@@ -10,6 +10,7 @@ class Game(object):
         self._defender = defender
         self._attacker.start_game('attacker', self._ROUNDS)
         self._defender.start_game('defender', self._ROUNDS)
+        self._players_in_game = players_in_game
 
     def message(self, username, message):
         if self._attacker.name() == username:
@@ -33,10 +34,10 @@ class Game(object):
 
     def attacker_guess(self, is_bot):
         # remove players from game
-        del players_in_game[attacker]
+        del self._players_in_game[self._attacker]
 
-        if defender.is_bot():
-            del players_in_game[defender]
+        if not self._defender.is_bot():
+            del self._players_in_game[self._defender]
 
         if self._defender.is_bot() == is_bot:
             self._attacker.end_game(True)

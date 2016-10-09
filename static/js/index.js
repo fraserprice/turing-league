@@ -3,10 +3,24 @@ var user;
 var role;
 var timer;
 
+
+$(window).on("beforeunload", function() {  
+    if (socket !== null) {
+        socket.emit('loss', { user : user, message : 'disconnect' });
+    }
+});
+
 $(document).ready(function() {
     socket = null;
     user = "";
     role = "";
+
+    $("#btn-yes").click(function() {
+        replyYes();
+    });
+    $("#btn-no").click(function() {
+        replyNo();
+    });
 
     $("#main-chat").hide();
     $("#is-bot-dialog").hide();
@@ -18,9 +32,6 @@ $(document).ready(function() {
     $("#btn-chat").click(function() {
         setMessage();
     });
-
-    $("#btn-yes").click(replyYes());
-    $("#btn-no").click(replyNo());
 
     disableChat(true);
 });
@@ -35,18 +46,13 @@ $(document).keydown(function(e) {
     }
 });
 
-$(window).unload(function() {
-    if (socket !== null) {
-        socket.emit('loss', { user : user, message : 'disconnect' });
-    }
-})
-
 function sendSystemMessage(msg, color) {
     var initial = '!';
     var time = getCurrentTime();
     var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/' + color + '/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix" style="margin-top: 12px;"> <strong class="primary-font" style="font-size: 20px">' + msg + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> </li>'
 
     $(".chat").append(post);
+    scrollChat();
 }
 
 function setNickname() {
@@ -67,7 +73,7 @@ function setMessage() {
 
 function turnTimeout() {
     socket.emit('loss', { user : user, message : 'timeout' });
-    sendSystemMessage("Time limit over! YOU LOSE!", "AA2222");
+    sendSystemMessage("Time limit over!", "AA2222");
     finishGame();
 }
 
@@ -112,6 +118,10 @@ function displayMessage(author, msg, color) {
     var post='<li class="left clearfix"><span class="chat-img pull-left"> <img src="http://placehold.it/50/'+ color +'/fff&text=' + initial + '" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"> <strong class="primary-font">' + author + '</strong> <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>' + time + '</small> </div> <p>' + msg + '</p> </div> </li>'
 
     $(".chat").append(post);
+    scrollChat();
+}
+
+function scrollChat() {
     var chat = document.getElementById("chat-body");
     chat.scrollTop = chat.scrollHeight;
 }
@@ -186,6 +196,7 @@ function initChat(nickname) {
     if(data.role === "attacker") {
         role = "attacker";
         msg = "Figure out if you're chatting with another human or a bot!";
+        startTimer();
         disableChat(false);
     } else {
         role = "defender";
@@ -208,6 +219,8 @@ function initChat(nickname) {
     } else {
         sendSystemMessage("You lose!", "AA2222");
     }
+    finishGame();
+    socket.disconnect();
   });
 }
 
