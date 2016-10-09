@@ -64,7 +64,7 @@ def start_request(message):
             if random.choice([True, False]):
                 name, random_bot = random.choice(bot.BOTS)
                 chatbot = ChatBot(name, random_bot.start_session(),
-                        random_bot.bot_type, db)
+                        random_bot.bot_type(), db)
                 print 'matching ' + opponent.name() + ' with ' + chatbot.name()
                 players_in_game[opponent] = Game(opponent, chatbot, players_in_game)
 
@@ -110,7 +110,10 @@ def socket_connect():
 @socketio.on('disconnect', namespace='/chat')
 def socket_disconnect():
     print 'disconnect'
-    players_in_game[username_to_player[session_to_username[request.sid]]].player_forfeit(session_to_username[request.sid])
+    try:
+        players_in_game[username_to_player[session_to_username[request.sid]]].player_forfeit(session_to_username[request.sid])
+    except KeyError:
+        pass
 
 def start_timer(timer):
     timer.start()

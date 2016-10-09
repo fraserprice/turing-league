@@ -54,6 +54,7 @@ $(document).keydown(function(e) {
             setMessage();
         }
     }
+
 });
 
 function sendSystemMessage(msg, color) {
@@ -83,11 +84,12 @@ function setMessage() {
 
 function turnTimeout() {
     socket.emit('loss', { user : user, message : 'timeout' });
-    sendSystemMessage("Time limit over!", "AA2222");
+    sendSystemMessage("Time limit over, you lost!", "AA2222");
     finishGame();
 }
 
 function finishGame() {
+    $("#is-bot-dialog").hide();
     $('#play-again').show();
     disableChat(true);
     clearInterval(timer);
@@ -177,7 +179,7 @@ function setResponsesLeft(value) {
 function initChat(nickname) { 
   disableChat(true);
 
-  socket = io.connect('http://localhost:5000/chat');
+  socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
 
   $('#nickname-field').hide();
 
@@ -196,10 +198,6 @@ function initChat(nickname) {
 
   socket.on('disconnect', function() {
       sendSystemMessage("Disconnected!", "AA2222");
-  });
-
-  socket.on("nickname_in_use", function() {
-      
   });
 
   //Send game start request
