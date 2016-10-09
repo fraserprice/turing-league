@@ -50,7 +50,7 @@ def start_request(message):
     username = message['nickname']
 
     if not ((username in players_in_game) or (username in players_in_lobby)):
-        player = Human(username, request.sid)
+        player = Human(username, request.sid, db)
         username_to_player[username] = player
         session_to_username[request.sid] = username
 
@@ -64,8 +64,9 @@ def start_request(message):
             opponent = username_to_player[opponent_username]
 
             if random.choice([True, False]):
-                random_bot = random.choice(bot.BOTS)
-                chatbot = ChatBot(random_bot.bot_type(), random_bot.start_session())
+                name, random_bot = random.choice(bot.BOTS)
+                chatbot = ChatBot(name, random_bot.start_session(),
+                        random_bot.bot_type, db)
                 print 'matching ' + opponent.name() + ' with ' + chatbot.name()
                 players_in_game[opponent] = Game(opponent, chatbot, players_in_game)
 
@@ -111,7 +112,7 @@ def socket_connect():
 @socketio.on('disconnect', namespace='/chat')
 def socket_disconnect():
     print 'disconnect'
-    players_in_game[username_to_player[message[session_to_username[request.sid]]]].player_forfeit(session_to_username[request.sid])
+    players_in_game[username_to_player[session_to_username[request.sid]]].player_forfeit(session_to_username[request.sid])
 
 def start_timer(timer):
     timer.start()
