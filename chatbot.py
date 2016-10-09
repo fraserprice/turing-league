@@ -1,5 +1,7 @@
 """ChatBot implementation of Player."""
 from player import Player
+import time
+import random
 
 class ChatBot(Player):
 
@@ -14,6 +16,7 @@ class ChatBot(Player):
         pass
 
     def send_message(self, message):
+        time.sleep(random.randint(10, 15))
         self._game.defender_message(self._session.think(message))
 
     def end_game(self, victory):

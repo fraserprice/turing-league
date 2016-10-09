@@ -10,6 +10,20 @@ class Database:
                              passwd="TuringLeague69!",
                              db="turingleague_db")
 
+    def does_user_exist(self, name):
+        cur = self.db.cursor()
+        query = "SELECT name FROM user WHERE NAME = '%s'" % (name) 
+        cur.execute(query)
+        return(not(len(cur.fetchall()) == 0))
+
+    def does_bot_exist(self, name):
+        cur = self.db.cursor()
+        query = "SELECT name FROM bot WHERE NAME = '%s'" % (name) 
+        cur.execute(query)
+        return(not(len(cur.fetchall()) == 0))
+
+
+
     def add_user(self, name):
         cur = self.db.cursor()
         query = "INSERT INTO user(id, name, wins, loses) values (NULL, '%s', 0, 0)" % (name)

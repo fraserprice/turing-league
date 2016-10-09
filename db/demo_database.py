@@ -22,5 +22,8 @@ db = Database()
 
 #db.increment_bot_loses('Optimus Prime')
 
-db.add_user("Mia")
-db.add_bot("Schooby", "cleverbot")
+#db.add_user("Mia")
+#db.add_bot("Schooby", "cleverbot")
+
+print(db.does_user_exist('Mihai'))
+print(db.does_user_exist('Pedro'))

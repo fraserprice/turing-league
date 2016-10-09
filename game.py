@@ -26,11 +26,9 @@ class Game(object):
 
     def player_forfeit(self, username):
         if self._attacker.name() == username:
-            self._attacker.end_game(False)
             self._defender.end_game(True)
         else:
             self._attacker.end_game(True)
-            self._defender.end_game(False)
 
     def attacker_guess(self, is_bot):
         # remove players from game
