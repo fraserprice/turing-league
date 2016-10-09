@@ -49,24 +49,30 @@ $(document).ready(function() {
 $(document).keydown(function(e) {
     if(e.which == 13) {
         if (user === "") {
-            setNickname();
+            trySetNickname();
         } else {
             setMessage();
         }
     }
 });
 
-function trySetNickname(nickname) {  
+function trySetNickname() {  
+  var nickname = $("#nickname-input").val(); 
   if(socket === null) {
+    alert("setting up socket");
+    socket = io.connect('http://localhost:5000/chat');
+  } else {
+    socket.disconnect();
     socket = io.connect('http://localhost:5000/chat');
   }
 
-  $("#nick-warning").remove();
+  $("#nick-warning").hide();
   socket.emit("is_nickname_in_use", {nickname: nickname});
 
   socket.on("nickname_in_use", function(data) {
     if(data.in_use) {
-      $("#btn-start").after("<span id='nick-warning'>Nickname in use</span>");
+        
+        $("#nick-warning").show();
     } else {
       setNickname(nickname);
       $("#nick-warning").hide();
@@ -83,8 +89,7 @@ function sendSystemMessage(msg, color) {
     scrollChat();
 }
 
-function setNickname() {
-    var nick = $("#nickname-input").val(); 
+function setNickname(nick) {
     if (nick !== "") {
         user = nick;
         initChat(nick);
@@ -216,7 +221,7 @@ function initChat(nickname) {
 
   socket.on("nickname_in_use", function() {
       
-  });)
+  });
 
   //Send game start request
   socket.emit("start_request", { nickname: nickname });
