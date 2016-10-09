@@ -22,7 +22,11 @@ function fetchDatabase(url) {
     }
 
     for (var i = 0; i < num; i++) {
-        addRecord(i+1, db['user_name'][i], db['score'][i], bot);
+        if (bot) {
+            addRecord(i+1, db['bot_name'][i], db['score'][i], bot);
+        } else {
+            addRecord(i+1, db['user_name'][i], db['score'][i], bot);
+        }
     }
 }
 
