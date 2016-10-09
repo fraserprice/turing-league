@@ -37,7 +37,7 @@ $(document).keydown(function(e) {
 
 $(window).unload(function() {
     if (socket !== null) {
-        socket.emit('loss', { message : 'disconnect' });
+        socket.emit('loss', { user : user, message : 'disconnect' });
     }
 })
 
@@ -66,7 +66,7 @@ function setMessage() {
 }
 
 function turnTimeout() {
-    socket.emit('loss', { message : 'timeout' });
+    socket.emit('loss', { user : user, message : 'timeout' });
     sendSystemMessage("Time limit over! YOU LOSE!", "AA2222");
     finishGame();
 }
@@ -100,10 +100,7 @@ function sendMessage(author, msg) {
     displayMessage(author, msg, "55C1E7");
     socket.emit('message_submitted', { user : user, message : msg });
     var curr = $('#responses-val').text();
-    if (curr > 0) {
-        setResponsesLeft(curr - 1);
-    }
-
+    setResponsesLeft(curr - 1);
     $("#btn-input").val("");
     setTimer(20);
     clearInterval(timer);
@@ -187,9 +184,11 @@ function initChat(nickname) {
   socket.on('started', function(data) {
     var msg = "";
     if(data.role === "attacker") {
+        role = "attacker";
         msg = "Figure out if you're chatting with another human or a bot!";
         disableChat(false);
     } else {
+        role = "defender";
         msg = "Convince the other person that you're a bot!";
     }
     sendSystemMessage(msg, "E0F500");

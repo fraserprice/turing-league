@@ -53,7 +53,8 @@
 
     <div class="container-fluid" id="main-chat">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
             <div class="panel panel-primary">
                 <div class="panel-heading" id="chat-panel">
                     <span class="glyphicon glyphicon-comment"></span> Chat
@@ -72,9 +73,9 @@
                 </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="row side-chat">
-                    <h2 class="text-center">Time left: </h2>
+                    <p class="text-center">Time left: </p>
                     <div class="progress progress-striped">
                         <div class="progress-bar" style="width: 100%;" id="time-bar">
                             <span class="progress-text" id="time-val">20</span>
@@ -82,7 +83,7 @@
                     </div>
                 </div>
                 <div class="row side-chat">
-                <h2 class="text-center">Responses left: </h2>
+                <p class="text-center">Responses left: </p>
                 <div class="progress progress-striped">
                     <div class="progress-bar progress-bar-info" style="width: 100%;" id="responses-bar">
                         <span class="progress-text" id="responses-val">10</span>
@@ -90,11 +91,14 @@
                 </div>
                 </div>
                 <div class="row side-chat" id="is-bot-dialog">
-                    <h2 class="text-center">Is this a bot?</h2>
+                    <p class="text-center">Is this a bot?</p>
                     <div class="row">
-                        <div class="col-md-12 text-center">
-                            <button type="button" class="btnyes" id="btn-yes">Yes</button>
-                            <button type="button" class="btnno" id="btn-no">No</button>
+                        <div class="col-md-6 text-center">
+                            <button type="button" class="btn btn-primary btn-lg" id="btn-yes">Yes</button>
+                            </div>
+                        <div class="col-md-6 text-center">
+                            <button type="button" class="btn btn-primary btn-lg" id="btn-no">No</button>
+                            </div>
                         </div>
                     </div>
                 </div>

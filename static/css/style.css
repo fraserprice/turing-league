@@ -1,5 +1,6 @@
 body {
-    background-color: #ccccee
+    /*background-color: #ccccee*/
+    background-image: url("../seigaiha.png");
 }
 
 @media (max-width: 979px) {
@@ -77,6 +78,7 @@ body {
 }
 
 .side-chat {
+    font-size: 18px;
     margin-right: 10px;
     margin-left: 10px;
     margin-bottom: 15px;
@@ -110,42 +112,16 @@ body {
     font-size: 15px;
 }
 
-button:focus {
+#btn-yes:focus {
     outline: 0;
 }
 
-.btnyes {
-  -webkit-border-radius: 7;
-  -moz-border-radius: 7;
-  border-radius: 7px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  background: #5ba81c;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
+#btn-no:focus {
+    outline: 0;
 }
 
-.btnyes:hover {
-  background: #4bc52d;
-  text-decoration: none;
-}
-
-.btnno {
-  -webkit-border-radius: 7;
-  -moz-border-radius: 7;
-  border-radius: 7px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  background: #a63c1c;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-}
-
-.btnno:hover {
-  background: #d11b1b;
-  text-decoration: none;
+#btn-start:focus {
+    outline: 0;
 }
 
 .score-row {
