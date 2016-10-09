@@ -1,4 +1,4 @@
-var socket;
+var socket = null;
 var user;
 var role;
 var timer;
@@ -24,13 +24,23 @@ $(document).ready(function() {
 
     $("#main-chat").hide();
     $("#is-bot-dialog").hide();
+    $("#play-again").hide();
 
     $("#btn-start").click(function() {
-        setNickname();
+        trySetNickname();
     });
 
     $("#btn-chat").click(function() {
         setMessage();
+    });
+
+    $("#btn-play-again").click(function() {
+        $("#is-bot-dialog").hide();
+        $("#play-again").hide();
+        socket.disconnect();
+        setTimer(20);
+        clearChat();
+        initChat(user);
     });
 
     disableChat(true);
@@ -45,6 +55,24 @@ $(document).keydown(function(e) {
         }
     }
 });
+
+function trySetNickname(nickname) {  
+  if(socket === null) {
+    socket = io.connect('http://localhost:5000/chat');
+  }
+
+  $("#nick-warning").remove();
+  socket.emit("is_nickname_in_use", {nickname: nickname});
+
+  socket.on("nickname_in_use", function(data) {
+    if(data.in_use) {
+      $("#btn-start").after("<span id='nick-warning'>Nickname in use</span>");
+    } else {
+      setNickname(nickname);
+      $("#nick-warning").hide();
+    }
+  });
+}
 
 function sendSystemMessage(msg, color) {
     var initial = '!';
@@ -78,8 +106,10 @@ function turnTimeout() {
 }
 
 function finishGame() {
+    $('#play-again').show();
     disableChat(true);
     clearInterval(timer);
+    setTimer(0);
     setResponsesLeft(0);
 }
 
@@ -154,7 +184,7 @@ function setResponsesLeft(value) {
   $('#responses-val').text(value);
   var percentage = value/10 * 100;
   $('#responses-bar').css("width", percentage + "%");
-  if (value <= 5 && !$("#is-bot-dialog").is(":visible") && role === "attacker") {
+  if (value <= 5 && !$("#is-bot-dialog").is(":visible") && role === "attacker" && !(value == 0 && $('#time-val').text() === "0")) {
     $("#is-bot-dialog").show(600, "swing");
   }
   if (value == 0) {
@@ -175,8 +205,6 @@ function initChat(nickname) {
     $("html, body").animate({ scrollTop: $('.chat').offset().top }, 500);
   });
 
-  //Connect to socket
-  socket = io.connect('http://localhost:5000/chat');
 
   socket.on('connect', function() {
       sendSystemMessage("Connected!", "22AA22");
@@ -185,6 +213,10 @@ function initChat(nickname) {
   socket.on('disconnect', function() {
       sendSystemMessage("Disconnected!", "AA2222");
   });
+
+  socket.on("nickname_in_use", function() {
+      
+  });)
 
   //Send game start request
   socket.emit("start_request", { nickname: nickname });
@@ -220,8 +252,11 @@ function initChat(nickname) {
         sendSystemMessage("You lose!", "AA2222");
     }
     finishGame();
-    socket.disconnect();
   });
+}
+
+function clearChat() {
+   $(".chat").text(""); 
 }
 
 function startTimer() {

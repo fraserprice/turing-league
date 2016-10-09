@@ -37,13 +37,13 @@
      <div class="jumbotron text-center">
       <div class="container">
         <h1 id="jumbo-title">Turing League</h1>
-        <p>fight against robots</p>
+        <p>Bot or Not?</p>
         <p> <div id="nickname-field">
             <div class="row" style="margin-top: 100px;">
                 <div class="col-md-4"></div>
-                <div class="col-md-4">
-                <input id="nickname-input" type="text" class="form-control input-lg" placeholder="Nickname" style="margin-bottom: 30px">
-                </div>
+                    <div class="col-md-4">
+                        <input id="nickname-input" type="text" class="form-control input-lg" placeholder="Nickname" style="margin-bottom: 30px">
+                    </div>
                 </div>
                 <button class="btn btn-primary btn-lg" id="btn-start" href="#" role="button">Start chatting</button>
             </div>
@@ -52,56 +52,62 @@
     </div> 
 
     <div class="container-fluid" id="main-chat">
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-8">
-            <div class="panel panel-primary">
-                <div class="panel-heading" id="chat-panel">
-                    <span class="glyphicon glyphicon-comment"></span> Chat
-                </div>
-                <div class="panel-body" id="chat-body">
-                    <ul class="chat">
-                    </ul>
-                </div>
-                <div class="panel-footer">
-                    <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control" placeholder="Talk...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
-                        </span>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" id="chat-panel">
+                        <span class="glyphicon glyphicon-comment"></span> Chat
+                    </div>
+                    <div class="panel-body" id="chat-body">
+                        <ul class="chat">
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="btn-input" type="text" class="form-control" placeholder="Talk...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+                            </span>
+                        </div>
+                    </div>
                     </div>
                 </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="row side-chat">
-                    <p class="text-center">Time left: </p>
+                <div class="col-md-3">
+                    <div class="row side-chat">
+                        <p class="text-center">Time left: </p>
+                        <div class="progress progress-striped">
+                            <div class="progress-bar" style="width: 100%;" id="time-bar">
+                                <span class="progress-text" id="time-val">20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row side-chat">
+                    <p class="text-center">Responses left: </p>
                     <div class="progress progress-striped">
-                        <div class="progress-bar" style="width: 100%;" id="time-bar">
-                            <span class="progress-text" id="time-val">20</span>
+                        <div class="progress-bar progress-bar-info" style="width: 100%;" id="responses-bar">
+                            <span class="progress-text" id="responses-val">10</span>
                         </div>
                     </div>
-                </div>
-                <div class="row side-chat">
-                <p class="text-center">Responses left: </p>
-                <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-info" style="width: 100%;" id="responses-bar">
-                        <span class="progress-text" id="responses-val">10</span>
                     </div>
-                </div>
-                </div>
-                <div class="row side-chat" id="is-bot-dialog">
-                    <p class="text-center">Is this a bot?</p>
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <button type="button" class="btn btn-primary btn-lg" id="btn-yes">Yes</button>
+                    <div class="row side-chat" id="is-bot-dialog">
+                        <p class="text-center">Is this a bot?</p>
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <button type="button" class="btn btn-primary btn-lg" id="btn-yes">Yes</button>
                             </div>
-                        <div class="col-md-6 text-center">
-                            <button type="button" class="btn btn-primary btn-lg" id="btn-no">No</button>
+                            <div class="col-md-6 text-center">
+                                <button type="button" class="btn btn-primary btn-lg" id="btn-no">No</button>
                             </div>
                         </div>
                     </div>
+                    <div class="row side-chat" id="play-again">
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-primary btn-lg" id="btn-play-again">Play Again</button>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
