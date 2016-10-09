@@ -22,7 +22,7 @@ socketio = SocketIO(app, async_mode=async_mode)
 players_in_game = {} # username -> game
 players_in_lobby = [] # usernames
 username_to_player = {} # username -> player
-db = database.Database()
+# db = database.Database()
 
 @app.route('/')
 def index():
@@ -63,7 +63,7 @@ def start_request(message):
                 random_bot = random.choice(bot.BOTS)
                 chatbot = ChatBot(random_bot.bot_type(), random_bot.start_session())
                 print 'matching ' + opponent.name() + ' with ' + chatbot.name()
-                players_in_game[opponent] = Game(opponent, chatbot)
+                players_in_game[opponent] = Game(opponent, chatbot, players_in_game)
 
                 print 'adding ' + username  + ' to lobby...'
                 players_in_lobby.append(username)
@@ -71,9 +71,9 @@ def start_request(message):
             else:
                 print 'matching ' + player.name() + ' with ' + opponent.name()
                 if random.choice([True, False]):
-                    game = Game(player, opponent)
+                    game = Game(player, opponent, players_in_game)
                 else:
-                    game = Game(opponent, player)
+                    game = Game(opponent, player, players_in_game)
 
                 players_in_game[player] = game
                 players_in_game[opponent] = game
@@ -86,18 +86,15 @@ def message_submitted(message):
 @socketio.on('bot_decision', namespace='/chat')
 def bot_decision(message):
     print 'bot decision'
-    # TODO: notify game
-    print message['bot']
+    players_in_game[username_to_player[message['user']]].attacker_guess(message['bot'])
 
-@socketio.on('stop_request', namespace='/chat')
-def stop_request():
-    print 'stop request'
-    # TODO: notify game
+@socketio.on('loss', namespace='/chat')
+def player_forfeit(message):
+    players_in_game[username_to_player[message['user']]].player_forfeit(message['user'])
     disconnect()
 
 @socketio.on('connect', namespace='/chat')
 def socket_connect():
-    # TODO: 
     print 'connect'
 
 @socketio.on('disconnect', namespace='/chat')

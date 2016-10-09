@@ -1,7 +1,7 @@
-class Game:
+class Game(object):
     _ROUNDS = 10
 
-    def __init__(self, attacker, defender):
+    def __init__(self, attacker, defender, players_in_game):
         self._attacker = attacker
         
         if defender.is_bot():
@@ -23,10 +23,24 @@ class Game:
     def defender_message(self, message):
         self._attacker.send_message(message)
 
-    def attacker_guess(self, is_bot):
-        if self._defender.is_bot == is_bot:
-            attacker.end_game(True)
-            defender.end_game(False)
+    def player_forfeit(self, username):
+        if self._attacker.name() == username:
+            self._attacker.end_game(False)
+            self._defender.end_game(True)
         else:
-            attacker.end_game(False)
-            defender.end_game(True)
+            self._attacker.end_game(True)
+            self._defender.end_game(False)
+
+    def attacker_guess(self, is_bot):
+        # remove players from game
+        del players_in_game[attacker]
+
+        if defender.is_bot():
+            del players_in_game[defender]
+
+        if self._defender.is_bot() == is_bot:
+            self._attacker.end_game(True)
+            self._defender.end_game(False)
+        else:
+            self._attacker.end_game(False)
+            self._defender.end_game(True)
