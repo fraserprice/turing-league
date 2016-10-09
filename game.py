@@ -30,6 +30,10 @@ class Game(object):
         else:
             self._attacker.end_game(True)
 
+        del self._players_in_game[self._attacker]
+        if not self._defender.is_bot():
+            del self._players_in_game[self._defender]
+
     def attacker_guess(self, is_bot):
         # remove players from game
         del self._players_in_game[self._attacker]

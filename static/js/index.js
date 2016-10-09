@@ -83,11 +83,12 @@ function setMessage() {
 
 function turnTimeout() {
     socket.emit('loss', { user : user, message : 'timeout' });
-    sendSystemMessage("Time limit over!", "AA2222");
+    sendSystemMessage("Time limit over, you lost!", "AA2222");
     finishGame();
 }
 
 function finishGame() {
+    $("#is-bot-dialog").hide();
     $('#play-again').show();
     disableChat(true);
     clearInterval(timer);
@@ -196,10 +197,6 @@ function initChat(nickname) {
 
   socket.on('disconnect', function() {
       sendSystemMessage("Disconnected!", "AA2222");
-  });
-
-  socket.on("nickname_in_use", function() {
-      
   });
 
   //Send game start request

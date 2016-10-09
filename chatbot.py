@@ -5,7 +5,7 @@ import random
 
 class ChatBot(Player):
 
-    def __init__(self, name, bot_type, session, db):
+    def __init__(self, name, session, bot_type, db):
         super(ChatBot, self).__init__(name, True)
         self._session = session
         self._bot_type = bot_type

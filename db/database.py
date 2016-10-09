@@ -1,8 +1,10 @@
 import MySQLdb
 import json
+
 class Database:
 
    #DO NOT CHANGE THE QUERY FORMAT. PYTHON DOESN'T LIKE IT :(   
+
 
     def __init__(self):
         self.db = MySQLdb.connect(host="localhost",                         
