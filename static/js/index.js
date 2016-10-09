@@ -49,7 +49,7 @@ $(document).ready(function() {
 $(document).keydown(function(e) {
     if(e.which == 13) {
         if (user === "") {
-            trySetNickname();
+            setNickname();
         } else {
             setMessage();
         }
