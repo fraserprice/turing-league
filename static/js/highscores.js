@@ -1,12 +1,14 @@
 var usersUrl = "/leaderboards/users"
 var botsUrl = "/leaderboards/bots"
 
-$("#bot-leaderboards").ready(function() {
-    fetchDatabase(botsUrl);
-});
+$(document).ready(function() {
+    if ($("#bot-leaderboards").length) {
+        fetchDatabase(botsUrl);
+    }
 
-$("#user-leaderboards").ready(function() {
-    fetchDatabase(usersUrl);
+    if ($("#user-leaderboards").length) {
+        fetchDatabase(usersUrl);
+    }
 });
 
 function fetchDatabase(url) {
