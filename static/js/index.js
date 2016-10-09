@@ -54,6 +54,7 @@ $(document).keydown(function(e) {
             setMessage();
         }
     }
+
 });
 
 function sendSystemMessage(msg, color) {
@@ -178,7 +179,7 @@ function setResponsesLeft(value) {
 function initChat(nickname) { 
   disableChat(true);
 
-  socket = io.connect('http://localhost:5000/chat');
+  socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
 
   $('#nickname-field').hide();
 
