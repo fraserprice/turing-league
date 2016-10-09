@@ -25,9 +25,14 @@ Complete with a leaderboard for the smartest bots and users.
 *Messaging* - web-sockets
 
 ----
+
 ## Credits
 
 + Fraser Price @fraserprice
 + Nik Gupta @neprune
 + Han Thi Nguyen @sunakarus
 + Mihai Vanea @mihaivanea
+
+----
+
+Made for HackUPC 2016 Fall in less than 2 days.
