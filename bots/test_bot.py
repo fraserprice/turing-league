@@ -4,10 +4,10 @@ from bot import Bot
 factory = ChatterBotFactory()
 
 bot1 = Bot("cleverbot")
-bot1sesh = bot1.start_session(bot1)
+bot1sesh = bot1.start_session()
 
 bot2 = Bot("pandorabots")
-bot2sesh = bot2.start_session(bot2)
+bot2sesh = bot2.start_session()
 
 start = "How are you?"
 
