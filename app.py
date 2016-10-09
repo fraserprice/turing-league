@@ -8,7 +8,7 @@ from chatbot import ChatBot
 from bots import bot
 from game import Game
 import random
-# from db import database
+from db import database
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
@@ -23,7 +23,7 @@ players_in_game = {} # username -> game
 players_in_lobby = [] # usernames
 username_to_player = {} # username -> player
 session_to_username = {}
-# db = database.Database()
+db = database.Database()
 
 @app.route('/')
 def index():
@@ -35,13 +35,11 @@ def highscores():
 
 @app.route('/leaderboards/bots', methods=['GET'])
 def get_best_bots():
-    pass
-    # return db.get_top_bots_table()
+    return db.get_top_bots_table()
 
 @app.route('/leaderboards/users', methods=['GET'])
 def get_best_users():
-    pass
-    # return db.get_top_users_table()
+    return db.get_top_users_table()
 
 @socketio.on('start_request', namespace='/chat')
 def start_request(message):
@@ -49,7 +47,7 @@ def start_request(message):
 
     username = message['nickname']
 
-    if not (username in players_in_game) or (username in players_in_lobby):
+    if not ((username in players_in_game) or (username in players_in_lobby)):
         player = Human(username, request.sid)
         username_to_player[username] = player
         session_to_username[request.sid] = username
@@ -81,6 +79,8 @@ def start_request(message):
 
                 players_in_game[player] = game
                 players_in_game[opponent] = game
+    else:
+            emit('nickname in use', room=request.sid)
             
 @socketio.on('message_submitted', namespace='/chat')
 def message_submitted(message):
