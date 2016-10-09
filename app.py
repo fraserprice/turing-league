@@ -79,8 +79,13 @@ def start_request(message):
 
                 players_in_game[player] = game
                 players_in_game[opponent] = game
+
+@socketio.on('is_nickname_in_use', namespace='/chat')
+def message_submitted(message):
+    if ((username in players_in_game) or (username in players_in_lobby)):
+        emit('nickname_in_use', {'in_use' : True}, room=request.sid)
     else:
-            emit('nickname in use', room=request.sid)
+        emit('nickname_in_use', {'in_use' : False}, room=request.sid)
             
 @socketio.on('message_submitted', namespace='/chat')
 def message_submitted(message):
