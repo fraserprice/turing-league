@@ -34,7 +34,7 @@ def highscores():
     return render_template('highscores.html')
 
 @app.route('/bots')
-def highscores():
+def bots():
     return render_template('bots.html')
 
 @app.route('/leaderboards/bots', methods=['GET'])
