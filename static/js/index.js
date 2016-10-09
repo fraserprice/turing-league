@@ -27,7 +27,7 @@ $(document).ready(function() {
     $("#play-again").hide();
 
     $("#btn-start").click(function() {
-        trySetNickname();
+        setNickname();
     });
 
     $("#btn-chat").click(function() {
@@ -56,30 +56,6 @@ $(document).keydown(function(e) {
     }
 });
 
-function trySetNickname() {  
-  var nickname = $("#nickname-input").val(); 
-  if(socket === null) {
-    alert("setting up socket");
-    socket = io.connect('http://localhost:5000/chat');
-  } else {
-    socket.disconnect();
-    socket = io.connect('http://localhost:5000/chat');
-  }
-
-  $("#nick-warning").hide();
-  socket.emit("is_nickname_in_use", {nickname: nickname});
-
-  socket.on("nickname_in_use", function(data) {
-    if(data.in_use) {
-        
-        $("#nick-warning").show();
-    } else {
-      setNickname(nickname);
-      $("#nick-warning").hide();
-    }
-  });
-}
-
 function sendSystemMessage(msg, color) {
     var initial = '!';
     var time = getCurrentTime();
@@ -89,7 +65,8 @@ function sendSystemMessage(msg, color) {
     scrollChat();
 }
 
-function setNickname(nick) {
+function setNickname() {
+    var nick = $("#nickname-input").val(); 
     if (nick !== "") {
         user = nick;
         initChat(nick);
@@ -199,6 +176,8 @@ function setResponsesLeft(value) {
 
 function initChat(nickname) { 
   disableChat(true);
+
+  socket = io.connect('http://localhost:5000/chat');
 
   $('#nickname-field').hide();
 
