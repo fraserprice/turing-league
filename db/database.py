@@ -7,9 +7,8 @@ class Database:
 
 
     def __init__(self):
-        self.db = MySQLdb.connect(host="localhost",                         
+        self.db = MySQLdb.connect(host="127.0.0.1",                         
                              user="root",         
-                             passwd="TuringLeague69!",
                              db="turingleague_db")
 
     def does_user_exist(self, name):
