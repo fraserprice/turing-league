@@ -1,23 +1,36 @@
 var usersUrl = "/leaderboards/users"
+var botsUrl = "/leaderboards/bots"
 
 $(document).ready(function() {
-    fetchDatabase();
+    if ($("#bot-leaderboards").length) {
+        fetchDatabase(botsUrl);
+    }
+
+    if ($("#user-leaderboards").length) {
+        fetchDatabase(usersUrl);
+    }
 });
 
-function fetchDatabase() {
-    var res = httpGet(usersUrl);
+function fetchDatabase(url) {
+    var res = httpGet(url);
     var db = JSON.parse(res);
+    var bot = url === botsUrl;
 
     var num = db['score'].length;
     if (num > 10) {
         num = 10;
     }
+
     for (var i = 0; i < num; i++) {
-        addRecord(i+1, db['user_name'][i], db['score'][i]);
+        if (bot) {
+            addRecord(i+1, db['bot_name'][i], db['score'][i], bot);
+        } else {
+            addRecord(i+1, db['user_name'][i], db['score'][i], bot);
+        }
     }
 }
 
-function addRecord(rank, name, points) {
+function addRecord(rank, name, points, bot) {
     var id = "";
     if (rank === 1) {
         id = 'id = "score-first"';
@@ -28,7 +41,11 @@ function addRecord(rank, name, points) {
     } 
 
     var template = ' <div class="row score-row"' + id + '> <div class="col-xs-1 score-rank text-center"> ' + rank + ' </div> <div class="col-xs-10 score-name"> ' + name + ' </div> <div class="col-xs-1 score-points"> ' + points + ' </div> </div> '
-    $("#user-leaderboards").append(template);
+    if (bot) {
+        $("#bot-leaderboards").append(template);
+    } else {
+        $("#user-leaderboards").append(template);
+    }
 }
 
 function httpGet(url)

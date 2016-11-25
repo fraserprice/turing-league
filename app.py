@@ -33,6 +33,10 @@ def index():
 def highscores():
     return render_template('highscores.html')
 
+@app.route('/bots')
+def bots():
+    return render_template('bots.html')
+
 @app.route('/leaderboards/bots', methods=['GET'])
 def get_best_bots():
     return db.get_top_bots_table()
